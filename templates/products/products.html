@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% for object in object_list %}
+    <li>
+        <a href="/products/{{ object.id }}">{{ object.name }} : {{ object.id }}</a>
+    </li>
+{% endfor %}
+
+{% endblock %}
