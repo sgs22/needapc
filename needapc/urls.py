@@ -16,13 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.views.static import serve
+
 from products.views import (
+    product_create_view,
     product_list_view,
+    product_get_view,
     home_view,
+    base_view,
 )
 
 urlpatterns = [
     path('', home_view),
     path('products/', product_list_view),
+    path('products/<int:id>/', product_get_view),
+    path('base/', base_view),
     path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]

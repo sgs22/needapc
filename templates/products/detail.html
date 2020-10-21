@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<h1>{{ object.name }}</h1>
+
+<ul>
+    <li>
+        <img src="{{ object.image }}" alt="Laptop">
+    </li>
+    <li>
+        <a>Price : £{{ object.price }}</a>
+    </li>
+    <li>
+        <a>Brand : {{ object.brand }}</a>
+    </li>
+    <li>
+        <a>Model Number : {{ object.modelnumber }}</a>
+    </li>
+    <li>
+        <a>Size : {{ object.size }}</a>
+    </li>
+</ul>
+
+
+<ul>
+    <li>
+        <a href="/products/">Back to Products</a>
+    </li>
+</ul>
+{% endblock %}
+

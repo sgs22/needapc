@@ -2,11 +2,18 @@
 {% load static %}
 
 {% block content %}
+<h1>Products List</h1>
 
 {% for object in object_list %}
     <li>
-        <a href="/products/{{ object.id }}">{{ object.name }} : {{ object.id }}</a>
+        <a href="/products/{{ object.id }}">{{ object.name }} : £{{ object.price }}</a>
     </li>
 {% endfor %}
+
+<ul>
+    <li>
+        <a href="/">Back to Home</a>
+    </li>
+</ul>
 
 {% endblock %}
