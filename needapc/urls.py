@@ -19,6 +19,8 @@ from django.urls import path
 from django.conf import settings
 from django.views.static import serve
 
+from django.conf.urls.static import static
+
 from products.views import (
     product_create_view,
     product_list_view,
@@ -27,17 +29,25 @@ from products.views import (
     base_view,
 )
 
+# urlpatterns = [
+#     path('', home_view),
+#     path('products/', product_list_view),
+#     path('products/<int:id>/', product_get_view),
+#     path('base/', base_view),
+#     path('admin/', admin.site.urls),
+# ]
+
+# if settings.DEBUG:
+#     urlpatterns += [
+#         path(r'^media/(?P<path>.*)$', serve, {
+#             'document_root': settings.MEDIA_ROOT,
+#         }),
+#     ]
+
 urlpatterns = [
     path('', home_view),
     path('products/', product_list_view),
     path('products/<int:id>/', product_get_view),
     path('base/', base_view),
     path('admin/', admin.site.urls),
-]
-
-if settings.DEBUG:
-    urlpatterns += [
-        path(r'^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    ]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
