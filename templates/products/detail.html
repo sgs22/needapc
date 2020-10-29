@@ -7,9 +7,11 @@
 <h1>{{ object.name }}</h1>
 
 <ul>
+    {% if object.image %}
     <li>
-        <img src="{{ object.image }}" alt="{{ object.name }}">
+        <img src="{{ object.image.url }}" class="img-fluid rounded" width="50%" alt="{{ object.name }}">
     </li>
+    {% endif %}
     <li>
         <a>Price : £{{ object.price }}</a>
     </li>

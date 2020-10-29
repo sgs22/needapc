@@ -29,25 +29,22 @@ from products.views import (
     base_view,
 )
 
-# urlpatterns = [
-#     path('', home_view),
-#     path('products/', product_list_view),
-#     path('products/<int:id>/', product_get_view),
-#     path('base/', base_view),
-#     path('admin/', admin.site.urls),
-# ]
-
-# if settings.DEBUG:
-#     urlpatterns += [
-#         path(r'^media/(?P<path>.*)$', serve, {
-#             'document_root': settings.MEDIA_ROOT,
-#         }),
-#     ]
-
 urlpatterns = [
     path('', home_view),
     path('products/', product_list_view),
     path('products/<int:id>/', product_get_view),
     path('base/', base_view),
     path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# urlpatterns = [
+#     path('', home_view),
+#     path('products/', product_list_view),
+#     path('products/<int:id>/', product_get_view),
+#     path('base/', base_view),
+#     path('admin/', admin.site.urls),
+# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,9 +5,27 @@
 <h1>Products List</h1>
 
 {% for object in object_list %}
-    <li>
+    <!-- <li>
         <a href="/products/{{ object.id }}">{{ object.name }} : £{{ object.price }}</a>
-    </li>
+    </li> -->
+    <div class="card mb-3" style="max-width: 1080px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            {% if object.image %}
+            <img src="{{ object.image.url }}" class="card-img" alt="{{ object.name }}">
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ object.name }}</h5>
+              <p class="card-text">£{{ object.price }}</p>
+            </div>
+            <div class="card-body">
+                <a href="/products/{{ object.id }}" class="card-link">See Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endfor %}
 
 <ul>
@@ -17,3 +35,4 @@
 </ul>
 
 {% endblock %}
+
