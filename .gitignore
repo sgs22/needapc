@@ -130,4 +130,5 @@ dmypy.json
 
 # Custom
 media
+media_cdn
 static
