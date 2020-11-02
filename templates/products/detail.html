@@ -2,35 +2,65 @@
 {% load static %}
 
 {% block content %}
+<div class="row p-3">
+    <div class="mx-auto">
+        <h1>{{ object.name }}</h1>
+    </div>
+</div>
 
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mx-auto">
+            {% if object.image %}
+            <img src="{{ object.image.url }}" class="img-fluid rounded"alt="{{ object.name }}">
+            {% endif %}
+        </div>
+      </div>
+      <div class="col">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Name: </th>
+                <td>{{ object.name }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Brand</th>
+                <td>{{ object.brand }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Model</th>
+                <td>{{ object.modelnumber }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Size</th>
+                <td>{{ object.size }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Price</th>
+                <td>£{{ object.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Purchase:</th>
+                <th><button type="button" class="btn btn-primary btn-warning btn-sm">Buy from Amazon</button></th>
+              </tr>
+            </thead>
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
 
-<h1>{{ object.name }}</h1>
-
-<ul>
-    {% if object.image %}
-    <li>
-        <img src="{{ object.image.url }}" class="img-fluid rounded" width="50%" alt="{{ object.name }}">
-    </li>
-    {% endif %}
-    <li>
-        <a>Price : £{{ object.price }}</a>
-    </li>
-    <li>
-        <a>Brand : {{ object.brand }}</a>
-    </li>
-    <li>
-        <a>Model Number : {{ object.modelnumber }}</a>
-    </li>
-    <li>
-        <a>Size : {{ object.size }}</a>
-    </li>
-</ul>
-
-<ul>
-    <li>
-        <a href="/products/">Back to Products</a>
-    </li>
-</ul>
 {% endblock %}
 
 
