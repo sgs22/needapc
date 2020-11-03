@@ -29,8 +29,23 @@ from products.views import (
     base_view,
 )
 
+from blog.views import (
+    blog_view
+)
+
+from quiz.views import (
+    quiz_view
+)
+
+from featured.views import (
+    featured_view
+)
+
 urlpatterns = [
     path('', home_view),
+    path('quiz/', quiz_view),
+    path('featured/', featured_view),
+    path('blog/', blog_view),
     path('products/', product_list_view),
     path('products/<int:id>/', product_get_view),
     path('base/', base_view),
