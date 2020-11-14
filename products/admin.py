@@ -3,4 +3,9 @@ from django.contrib import admin
 # Register your models here.
 from .models import ProductDetail
 
-admin.site.register(ProductDetail)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'timestamp')
+    list_filter = ('timestamp',)
+    search_fields = ['title', 'price']
+
+admin.site.register(ProductDetail, ProductAdmin)

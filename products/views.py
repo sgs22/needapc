@@ -18,18 +18,18 @@ def product_get_view(request, id=None, *args, **kwargs):
         raise Http404
     return render(request, "products/detail.html", {"object":obj})
 
-# currently using admin to import new products but could be useful in future
-def product_create_view(request, id=None, *args, **kwargs):
-    context = {}
-    form = ProductDetailForm(request.POST or None)
-    context["form"] = form
-    if form.is_valid():
-        form.save()
-        form = ProductDetailForm()
-        context["added"] = True
-        context["form"] = form
+# # currently using admin to import new products but could be useful in future
+# def product_create_view(request, id=None, *args, **kwargs):
+#     context = {}
+#     form = ProductDetailForm(request.POST or None)
+#     context["form"] = form
+#     if form.is_valid():
+#         form.save()
+#         form = ProductDetailForm()
+#         context["added"] = True
+#         context["form"] = form
 
-    return render(request, "base.html", context)
+#     return render(request, "base.html", context)
 
-def base_view(request, id=None, *args, **kwargs):
-    return render(request, "base.html")
+# def base_view(request, id=None, *args, **kwargs):
+#     return render(request, "base.html")
