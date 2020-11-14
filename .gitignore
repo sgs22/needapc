@@ -131,3 +131,6 @@ dmypy.json
 # Static and Media root
 media_cdn/
 static/
+
+# Vscode workspace
+needapc.code-workspace
