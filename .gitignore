@@ -128,7 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Custom
-media
-media_cdn
-static
+# Static and Media root
+media_cdn/
+static/
