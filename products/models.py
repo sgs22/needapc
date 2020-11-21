@@ -9,5 +9,6 @@ class ProductDetail(models.Model):
     modelnumber = models.CharField(max_length=120, blank=True)
     size = models.CharField(max_length=120, blank=True)
     weight = models.CharField(max_length=120, blank=True)
+    url = models.CharField(max_length=120, blank=True)
     updated = models.DateTimeField(auto_now=True) # sets when saved
     timestamp = models.DateTimeField(auto_now_add=True) # sets when added
