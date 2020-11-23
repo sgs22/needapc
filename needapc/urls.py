@@ -39,7 +39,6 @@ urlpatterns = [
     path('', home_view),
     path('quiz/', quiz_view),
     path('', include('featured.urls')),
-    # path('featured/', featured_view),
     path('', include('accounts.urls')),
     path('', include('products.urls')),
     path('', include('blog.urls')),
