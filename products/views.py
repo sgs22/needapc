@@ -5,7 +5,7 @@ from django.http import HttpResponse, Http404
 from .models import ProductDetail
 
 def home_view(request, id=None, *args, **kwargs):
-    return render(request, "home.html")
+    return render(request, "index.html")
 
 def product_list_view(request, id=None, *args, **kwargs):
     qs = ProductDetail.objects.all()

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -11,12 +12,13 @@
   {% include 'base/css.html' %}
 
   <title>needapc</title>
-  
+
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -43,19 +45,74 @@
       </div>
     </div>
   </nav>
+  <div class="row">
+    <div class="col-md text-center" style="padding-right: 0; padding-left: 0;">
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        Please note, this service is in early alpha and you should expect to see some bugs. Thank you.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
   {% block content %}
 
   <h1>Hello World. This is base html</h1>
 
   <ul>
     <li>
-        <a href="/">Back to Home</a>
+      <a href="/">Back to Home</a>
     </li>
   </ul>
   {% endblock content %}
 
+  <!-- START FOOTER -->
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <i class="logo here"></i>
+        <small class="d-block mb-3 text-muted">&copy; 2020 needapc</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Navigation</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="javascript:changeLook()">Modern Dark Mode</a></li>
+          <li><a class="text-muted" href="javascript:changeBack()">Light Mode (Standard)</a></li>
+          <li><a class="text-muted" href="javascript:changeLook2()">Retro Mode</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Legal</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="application/assets/download/Models.zip">Download models</a></li>
+          <li><a class="text-muted" target="_blank" href="https://github.com/sgs22/Virtualmuseum">View source on
+              GitHub</a></li>
+          <li><a class="text-muted" href="application/assets/download/VRML.zip">Download VRML</a></li>
+          <li><a class="text-muted" target="_blank" href="#">Bibliography</li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5 style=color:#212529>Social</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" target="_blank" href="https://github.com/">GitHub</a></li>
+          <li><a class="text-muted" target="_blank" href="https://www.sussex.ac.uk/">Sussex University</a></li>
+          <li><a class="text-muted" target="_blank" href="https://www.linkedin.com/">Linkedin</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" target="_blank" href="#">Information</a></li>
+          <li><a class="text-muted" target="_blank" href="https://getbootstrap.com/">Bootstrap</a></li>
+          <li><a class="text-muted" target="_blank" href="https://www.x3dom.org/">X3dom</a></li>
+          <li><a class="text-muted" target="_blank" href="#">Privacy</a></li>
+          <li><a class="text-muted" target="_blank" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!-- END FOOTER -->
+
 </body>
+
 </html>
-
-
-
