@@ -5,7 +5,7 @@ STATUS = (
     (1,"Publish")
 )
 
-class Post(models.Model):
+class FeaturedPost(models.Model):
     title = models.CharField(max_length=200, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='featured/%Y/%m/%d/', max_length=255, null=True, blank=True)
