@@ -10,8 +10,9 @@ from .models import FeaturedPost
 
 # Rendering template with query on all featured posts
 def featured_view(request, id=None, *args, **kwargs):
-    queryset = FeaturedPost.objects.all()
+    queryset = FeaturedPost.objects.filter(status=1).order_by('-created_on')
     return render(request, "featured/featured.html", {"featured_list": queryset})
+
 
 # Rendering featured product in modal
 # def featured_get_modal(request, id=None, *args, **kwargs):

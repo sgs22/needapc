@@ -49,16 +49,16 @@
   </div> -->
   <div class="row pt-3">
   {% for object in featured_list %}
-    <div class="col-md-6 text-center pr-2 pt-3 pb-3">
+    <div class="col-md-6 text-center pt-3 pb-3">
       <div class="card cardfeatured" style="background-image: none;">
         <div class="card-img-overlay overlayfeatured">
           <h5 class="card-title">{{ object.title }}</h5>
           <p class="card-text">£{{ object.price }}</p>
         </div>
         {% if object.image %}
-        <img src="{{ object.image.url }}" class="imgfeatured card-img-top" alt="...">
+        <img src="{{ object.image.url }}" class="imgfeatured card-img-top" alt="{{ object.title }}">
         {% else %}
-        <img src="{% static '/img/placeholder.jpg' %}" class="imgfeatured card-img-top" alt="...">
+        <img src="{% static '/img/placeholder.jpg' %}" class="imgfeatured card-img-top" alt="placeholder image">
         {% endif %}
         <div class="card-body">
           <p class="card-text">{{ object.content }}</p>
@@ -66,6 +66,9 @@
         </div>
       </div>
     </div>
+    <!-- {% if forloop.counter|divisibleby:2 %}
+    <div class="row pt-3"></div>
+    {% endif %} -->
   {% endfor %}
   </div>
 </div>
