@@ -17,7 +17,9 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-created_on'] #LIFO ordering
+        verbose_name = "Blog Post"
+        verbose_name_plural = "Blog Posts"
 
     def __str__(self):
         return self.title
@@ -32,7 +34,7 @@ class Comment(models.Model):
     active = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['created_on'] #FIFO ordering
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)

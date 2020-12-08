@@ -16,5 +16,11 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ("status",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
+    actions = ['publish', 'draft']
+
+    def publish(self, request, queryset):
+        queryset.update(status=1)
+    def draft(self, request, queryset):
+        queryset.update(status=0)
   
 admin.site.register(Post, PostAdmin)
