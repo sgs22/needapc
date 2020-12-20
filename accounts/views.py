@@ -7,6 +7,11 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
+"""
+Not currently being used,
+
+render accounts page and register page
+"""
 @login_required
 def accounts(request):
     return render(request, 'accounts/accounts.html')
@@ -22,6 +27,10 @@ class SignUpView(CreateView):
         return valid
 
 
+"""
+Checks if the username has already been used in the database
+returns response if taken else will register
+"""
 def validate_username(request):
     """Check username availability"""
     username = request.GET.get('username', None)
