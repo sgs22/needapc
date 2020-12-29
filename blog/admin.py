@@ -2,12 +2,12 @@ from django.contrib import admin
 from .models import Post, Comment
 
 """
-Checks if current logged in user is an admin/staff
-then will display the current comments on each blog post that are awaiting
-to be approved.
+    Checks if current logged in user is an admin/staff
+    then will display the current comments on each blog post that are awaiting
+    to be approved.
 
-ModelAdmin is to register the model in the admin panel and the
-above fields are used to structure the admin panels
+    ModelAdmin is to register the model in the admin panel and the
+    above fields are used to structure the admin panels
 """
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -20,11 +20,11 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 """
-Display the queryset of all blog posts and registers if they need
-to be updated on whether they are published or draft.
+    Display the queryset of all blog posts and registers if they need
+    to be updated on whether they are published or draft.
 
-ModelAdmin is to register the model in the admin panel and the
-above fields are used to structure the admin panels.
+    ModelAdmin is to register the model in the admin panel and the
+    above fields are used to structure the admin panels.
 """
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status','created_on')

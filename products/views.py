@@ -4,6 +4,9 @@ from django.http import HttpResponse, Http404
 
 from .models import ProductDetail
 
+"""
+    Current location
+"""
 def home_view(request, id=None, *args, **kwargs):
     return render(request, "index.html")
 

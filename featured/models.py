@@ -1,10 +1,21 @@
 from django.db import models
 
+"""
+    Initialises the status model for featured products
+"""
 STATUS = (
     (0,"Draft"),
     (1,"Publish")
 )
 
+"""
+    Model for the featured products
+
+    Saves all admin upload images to a featured media file and
+    sorts them by date uploaded
+
+    Featured posts ordered by newest first
+"""
 class FeaturedPost(models.Model):
     title = models.CharField(max_length=200, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)

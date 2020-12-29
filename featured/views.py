@@ -4,11 +4,14 @@ from django.http import HttpResponse, Http404
 
 from .models import FeaturedPost
 
-# Orignal render of html page template
-# def featured_view(request, id=None, *args, **kwargs):
-#     return render(request, "featured/featured.html")
 
-# Rendering template with query on all featured posts
+"""
+    Rendering template with query on all featured posts
+
+    Filter by those that are marked published
+
+    Order by newest featured products first
+"""
 def featured_view(request, id=None, *args, **kwargs):
     queryset = FeaturedPost.objects.filter(status=1).order_by('-created_on')
     return render(request, "featured/featured.html", {"featured_list": queryset})

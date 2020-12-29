@@ -3,15 +3,29 @@ from .models import Post
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
 
-
+"""
+    Filter the posts to only display those that are published
+    and order them by newest first in queryset
+"""
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'blog/blog.html'
 
+"""
+    View for seeing the blog post on a single page
+"""
 class PostDetail(generic.DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
+"""
+    Get the blog post details else 404
+
+    Show form for user so they can comment on post when blog
+    is in detailed view
+
+    Render field order requires for form
+"""
 def post_detail(request, slug):
     template_name = 'blog/post_detail.html'
     post = get_object_or_404(Post, slug=slug)

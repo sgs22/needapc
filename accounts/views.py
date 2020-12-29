@@ -8,9 +8,9 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
 """
-Not currently being used,
+    Not currently being used,
 
-render accounts page and register page
+    render accounts page and register page
 """
 @login_required
 def accounts(request):
@@ -28,8 +28,8 @@ class SignUpView(CreateView):
 
 
 """
-Checks if the username has already been used in the database
-returns response if taken else will register
+    Checks if the username has already been used in the database
+    returns response if taken else will register
 """
 def validate_username(request):
     """Check username availability"""

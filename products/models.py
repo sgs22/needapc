@@ -1,6 +1,12 @@
 from django.db import models
 
-# Create your models here.
+"""
+    Model for the products
+
+    Saves all admin upload images to a 'product' media file and
+    sorts them by date uploaded
+
+"""
 class ProductDetail(models.Model):
     name = models.CharField(max_length=120, blank=False) 
     price = models.DecimalField(max_digits=6, decimal_places=2)
