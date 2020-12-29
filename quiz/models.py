@@ -1,39 +1,35 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+'''
+    Not sure that more than one quiz is needed as only one quiz will be active on the site at a time
+'''
 
-# class Quiz(models.Model):
-#     name = models.CharField(max_length=50, unique=True)
-#     questionCount = models.IntegerField(default=0)
-#     description = models.CharField(max_length=70)
-#     created_on = models.DateTimeField(auto_now_add=True,null=True,blank=True)
-#     updated_on = models.DateTimeField(auto_now= True)
-
-#     class Meta:
-#         verbose_name = "Quiz"
-#         verbose_name_plural = "Quizzes"
 
 class Question(models.Model):
-    # quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE,related_name='quiz')
     question_text = models.CharField(max_length=200, unique=True)
     description_text = models.CharField(max_length=50, unique=True)
     question_image = models.ImageField(upload_to='quiz/%Y/%m/%d/', max_length=255, null=True, blank=True)
     pub_date = models.DateTimeField('date published')
-    # user = models.ForeignKey(User, on_delete= models.CASCADE,related_name='user_quiz', default=0)
 
     class Meta:
         verbose_name = "Question"
         verbose_name_plural = "Questions"
-    
-    # def __str__(self):
-    #     return self.question_text
 
+
+'''
+    Django polls tutorial could be used here to record the number 
+    of people selecting each choice for internal data insight?
+
+    Could be updated to include linking to a user so that it can be saved
+'''
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
-    # progress = models.IntegerField("progress")
-    # user = models.ForeignKey(User, on_delete= models.CASCADE,related_name='user_results', default=0)
 
-    # def __str__(self):
-    #     return self.answer
+    class Meta:
+        verbose_name = "Choice"
+        verbose_name_plural = "Choices"
+
+
 

@@ -27,9 +27,9 @@ from products.views import (
     home_view,
 )
 
-from quiz.views import (
-    quiz_view
-)
+# from quiz.views import (
+#     quiz_view
+# )
 
 from featured.views import (
     featured_view
@@ -37,7 +37,8 @@ from featured.views import (
 
 urlpatterns = [
     path('', home_view),
-    path('quiz/', quiz_view),
+    # path('quiz/', quiz_view),
+    path('', include('quiz.urls')),
     path('', include('featured.urls')),
     path('', include('accounts.urls')),
     path('', include('products.urls')),
