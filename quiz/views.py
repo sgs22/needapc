@@ -24,9 +24,16 @@ def choice_view(request, id=None, *args, **kwargs):
 # return render(request, "featured/featured.html", {"quiz_list": queryset})
 
 
-def question_view(request, question_id):
-    try:
-        q = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
-    return render(request, 'quiz/quiz.html', {'question': q})
+# def question_view(request, question_id):
+#     try:
+#         q = Question.objects.get(pk=question_id)
+#     except Question.DoesNotExist:
+#         raise Http404("Question does not exist")
+#     return render(request, 'quiz/quiz.html', {'question': q})
+
+# def choice_view(request, choice_id):
+#     try:
+#         q = Question.objects.get(pk=question_id)
+#     except Question.DoesNotExist:
+#         raise Http404("Question does not exist")
+#     return render(request, 'quiz/quiz.html', {'question': q})

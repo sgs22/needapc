@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <div class="row pt-3">
     <div class="col-lg">
-      <div class="jumbotron jumbotron-fluid jumbotronfeatured">
+      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
         <div class="container">
           <div class="row">
             <div class="col-lg">
@@ -41,7 +41,8 @@
   <div class="row pt-3">
   {% for object in featured_list %}
     <div class="col-md-6 text-center pt-3 pb-3">
-      <div class="card cardfeatured" style="background-image: none;">
+      <div class="card cardfeatured">
+        <a class="card-block stretched-link text-decoration-none" href="/products/{{ object.id }}"></a>
         <div class="card-img-overlay overlayfeatured">
           <h5 class="card-title">{{ object.title }}</h5>
           <p class="card-text">£{{ object.price }}</p>
@@ -53,7 +54,7 @@
         {% endif %}
         <div class="card-body">
           <p class="card-text">{{ object.content }}</p>
-          <a href="#" class="btn btn-secondary btnfeatured">Preview</a>
+          <!-- <a href="#" class="btn btn-secondary btnfeatured">Preview</a> -->
         </div>
       </div>
     </div>

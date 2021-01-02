@@ -1,5 +1,7 @@
 from django.db import models
 
+from products.models import ProductDetail
+
 """
     Initialises the status model for featured products
 """
@@ -17,6 +19,7 @@ STATUS = (
     Featured posts ordered by newest first
 """
 class FeaturedPost(models.Model):
+    product_id = models.ForeignKey(ProductDetail, on_delete=models.CASCADE) #get product ID from product model, TODO: FEATURED IF AND PRODUCT ID NEED TO BE THE SAME
     title = models.CharField(max_length=200, unique=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='featured/%Y/%m/%d/', max_length=255, null=True, blank=True)
