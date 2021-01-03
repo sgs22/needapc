@@ -34,5 +34,3 @@ def product_get_view(request, id=None, *args, **kwargs):
 
 #     return render(request, "base.html", context)
 
-# def base_view(request, id=None, *args, **kwargs):
-#     return render(request, "base.html")
