@@ -9,14 +9,14 @@
 <body>
     <div class="row p-5">
         <div class="mx-auto">
-          <h1>Sign up to track and share your results!</h1>
+          <h1>Register to needapc</h1>
         </div>
     </div>
     <div class="container mt-5 w-50">
         <form id="signupForm" method="POST">
             {% csrf_token %}
             {{ form|crispy  }}
-            <input type="submit" name="signupSubmit" class="btn btn-success btn-lg" />
+            <input type="submit" name="signupSubmit" class="btn btn-success"/>
         </form>
     </div>
 
@@ -40,6 +40,33 @@
                         else {
                             $('#id_username').removeClass('is-invalid').addClass('is-valid');
                             $('#usernameError').remove();
+
+                        }
+
+                    },
+                    // on error
+                    error: function (response) {
+                        // alert the error if any error occured
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+                
+                return false;
+            });
+            $('#id_email').keyup(function () {
+                // create an AJAX call
+                $.ajax({
+                    data: $(this).serialize(), // get the form data
+                    url: "{% url 'validate_email' %}",
+                    // on success
+                    success: function (response) {
+                        if (response.is_taken == true) {
+                            $('#id_email').removeClass('is-valid').addClass('is-invalid');
+                            $('#id_email').after('<div class="invalid-feedback d-block" id="emailError">This email is already being used!</div>')
+                        }
+                        else {
+                            $('#id_email').removeClass('is-invalid').addClass('is-valid');
+                            $('#emailError').remove();
 
                         }
 

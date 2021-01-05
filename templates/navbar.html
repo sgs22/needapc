@@ -27,18 +27,29 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">About Us</a>
-              <a class="dropdown-item" href="/admin/">Admin</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Legal</a>
             </div>
         </li>
         <li class="nav-item pl-1 pr-1">
             <a class="nav-link" href="/blog/">Blog</a>
-          </li>
+        </li>
+        <li class="nav-item pl-1 pr-1">
+          <a class="nav-link" href="/admin/">Admin</a>
+        </li>
       </ul>
       <div>
-        <a class="btn btnlogin" href="/admin/login/" role="button">Login</a>
+        {% if user.is_authenticated %}
+        <!-- <a class="btn btnsignup" href="#" role="button">Logged in: {{ user.username }}</a> -->
+        {% else %}
+        <a class="btn btnlogin" href="/login/" role="button">Login</a>
         <a class="btn btnsignup" href="/accounts/signup/" role="button">Sign Up</a>
+        {% endif %}
+        <!-- <a class="btn btnsignup" href="/admin/" role="button">Admin</a> -->
+        {% if user.is_authenticated %}
+        <a class="btn btnsignup" href="/accounts/" role="button">Dashboard</a>
+        <a class="btn btnlogin" href="/logout" role="button">Logout</a>
+        {% endif %}
       </div>
     </div>
   </nav>
