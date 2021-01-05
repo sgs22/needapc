@@ -27,22 +27,26 @@ from products.views import (
     home_view,
 )
 
-# from quiz.views import (
-#     quiz_view
-# )
-
 from featured.views import (
     featured_view
 )
 
+from accounts.views import (
+    login_view, 
+    logout_view,
+    register_view
+)
+
 urlpatterns = [
     path('', home_view),
-    # path('quiz/', quiz_view),
     path('', include('quiz.urls')),
     path('', include('featured.urls')),
     path('', include('accounts.urls')),
     path('', include('products.urls')),
     path('', include('blog.urls')),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('register/', register_view),
     path('admin/', admin.site.urls),
 ]
 

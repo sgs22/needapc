@@ -21,6 +21,8 @@ def product_get_view(request, id=None, *args, **kwargs):
         raise Http404
     return render(request, "products/detail.html", {"object":obj})
 
+
+
 # # currently using admin to import new products but could be useful in future
 # def product_create_view(request, id=None, *args, **kwargs):
 #     context = {}
