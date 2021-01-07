@@ -4,6 +4,14 @@ from django.http import HttpResponse, Http404
 
 from .models import Question, Choice
 
+def question_view(request):
+    question_list = Question.objects.all()
+    return render(request, "quiz/quiz.html", {"question_list": question_list})
+
+def choice_view(request):
+    choice_list = Choice.objects.all()
+    return render(request, "quiz/quiz.html", {"choice_list": choice_list})
+
 # Create your views here.
 
 # def quiz_view(request, id=None, *args, **kwargs):
@@ -13,9 +21,9 @@ from .models import Question, Choice
 #     questionquery = Question.objects.all()
 #     return render(request, "quiz/quiz.html", {"question_query": questionquery})
 
-def choice_view(request, id=None, *args, **kwargs):
-    choicequery =  Choice.objects.all()
-    return render(request, "quiz/quiz.html", {"choice_query": choicequery})
+# def choice_view(request, id=None, *args, **kwargs):
+#     choicequery =  Choice.objects.all()
+#     return render(request, "quiz/quiz.html", {"choice_query": choicequery})
 
 # def quiz_view(request, id=None, *args, **kwargs):
 #     queryset = FeaturedPost.objects.filter(status=1).order_by('-created_on')

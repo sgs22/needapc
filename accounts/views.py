@@ -19,7 +19,7 @@ def logout_view(request):
     return redirect("/")
 
 '''
-    TODO: add validation error for incorrect user input for feedback for the user rather than just refresing the page.
+    TODO: add validation error for incorrect user input for feedback for the user rather than just refreshing the page.
     
 '''
 def login_view(request):

@@ -2,11 +2,53 @@
 
 {% block content %}
 
-<h1>Welcome, {{ user.username }}!</h1>
-<a class="btn btn-success" href="/" role="button">Home</a>
-
-<div class="user_panel">
-    <a href="/logout">logout</a>
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-lg">
+      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg">
+              <h1 class="display-4">Dashboard</h1>
+              <p class="lead"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="row">
+    <div class="col">
+      <div class="mx-auto">
+          <h1>Welcome, {{ user.username }}!</h1>
+      </div>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Name: </th>
+              <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Change Password:</th>
+              <td>{{ object.modelnumber }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-borderless">
+        </table>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
+
