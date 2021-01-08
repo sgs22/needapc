@@ -1,35 +1,25 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, Http404
 
 
 from .models import Question, Choice
 
 def question_view(request):
-    question_list = Question.objects.all()
-    return render(request, "quiz/quiz.html", {"question_list": question_list})
+    question_list = Question.objects.order_by('pub_date')
+    return render(request, "quiz/quiz.html", {'question_list': question_list})
 
-def choice_view(request):
+def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'quiz/detail.html', {'question': question})
+
+def choice_view(request, id=None, *args, **kwargs):
     choice_list = Choice.objects.all()
     return render(request, "quiz/quiz.html", {"choice_list": choice_list})
 
-# Create your views here.
 
-# def quiz_view(request, id=None, *args, **kwargs):
-#     return render(request, "quiz/quiz.html")
 
-# def question_view(request, id=None, *args, **kwargs):
-#     questionquery = Question.objects.all()
-#     return render(request, "quiz/quiz.html", {"question_query": questionquery})
+# Create your views here. ____________________________________________________________
 
-# def choice_view(request, id=None, *args, **kwargs):
-#     choicequery =  Choice.objects.all()
-#     return render(request, "quiz/quiz.html", {"choice_query": choicequery})
-
-# def quiz_view(request, id=None, *args, **kwargs):
-#     queryset = FeaturedPost.objects.filter(status=1).order_by('-created_on')
-#     return render(request, "featured/featured.html", {"featured_list": queryset})
-
-# return render(request, "featured/featured.html", {"quiz_list": queryset})
 
 
 # def question_view(request, question_id):

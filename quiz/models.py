@@ -15,6 +15,9 @@ class Question(models.Model):
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
+    def __str__(self):
+        return self.question_text
+
 
 '''
     Django polls tutorial could be used here to record the number 
@@ -29,6 +32,9 @@ class Choice(models.Model):
     class Meta:
         verbose_name = "Choice"
         verbose_name_plural = "Choices"
+    
+    def __str__(self):
+        return self.choice_text
 
 
 
