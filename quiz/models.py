@@ -12,6 +12,7 @@ class Question(models.Model):
     pub_date = models.DateTimeField('date published')
 
     class Meta:
+        ordering = ['pub_date'] 
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
@@ -28,6 +29,8 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=120)
+    votes = models.IntegerField(default=0)
+    selected = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Choice"
@@ -35,6 +38,18 @@ class Choice(models.Model):
     
     def __str__(self):
         return self.choice_text
+
+# class QuizAnswer(models.Model):
+#     choice = models.ForeignKey(Choice, on_delete=models.CASCADE, default=DEFAULT_CHOICE_ID)
+#     user_answer = models.CharField(max_length=120)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+#     class Meta:
+#         verbose_name = "QuizAnswer"
+#         verbose_name_plural = "QuizAnswers"
+    
+    # def __str__(self):
+    #     return self.user_answer
 
 
 

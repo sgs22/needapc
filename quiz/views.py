@@ -1,5 +1,6 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, Http404
+from django.urls import reverse
 
 
 from .models import Question, Choice
@@ -15,6 +16,50 @@ def detail(request, question_id):
 def choice_view(request, id=None, *args, **kwargs):
     choice_list = Choice.objects.all()
     return render(request, "quiz/quiz.html", {"choice_list": choice_list})
+
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'quiz/results.html', {'question': question})
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'quiz/detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))
+
+def commit(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    # choice = get_object_or_404(Choice, pk=choice_id) # add choice?
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice']) #gets selected choice
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'quiz/detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.selected = True
+        selected_choice.save()
+        
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))
+
+
 
 
 
