@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 '''
@@ -15,6 +18,10 @@ class Question(models.Model):
         ordering = ['pub_date'] 
         verbose_name = "Question"
         verbose_name_plural = "Questions"
+    
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def __str__(self):
         return self.question_text

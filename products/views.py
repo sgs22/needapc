@@ -10,6 +10,9 @@ from .models import ProductDetail
 def home_view(request, id=None, *args, **kwargs):
     return render(request, "index.html")
 
+'''
+    TODO: Update product listing to use generic views?
+'''
 def product_list_view(request, id=None, *args, **kwargs):
     qs = ProductDetail.objects.all()
     return render(request, "products/products.html", {"object_list": qs})
