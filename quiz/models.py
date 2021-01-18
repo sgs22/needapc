@@ -46,17 +46,20 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-# class QuizAnswer(models.Model):
-#     choice = models.ForeignKey(Choice, on_delete=models.CASCADE, default=DEFAULT_CHOICE_ID)
-#     user_answer = models.CharField(max_length=120)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+'''
+    Model to store answers given by participant.
+'''
+class UserAnswer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    question = models.CharField(max_length=500, null=True, blank=True)
+    answer = models.CharField(max_length=500, null=True, blank=True)
 
-#     class Meta:
-#         verbose_name = "QuizAnswer"
-#         verbose_name_plural = "QuizAnswers"
+    class Meta:
+        verbose_name = "UserAnswer"
+        verbose_name_plural = "UserAnswers"
     
-    # def __str__(self):
-    #     return self.user_answer
+    def __str__(self):
+        return self.user
 
 
 
