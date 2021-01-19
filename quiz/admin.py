@@ -1,21 +1,37 @@
 from django.contrib import admin
+import nested_admin
+from .models import Quiz, Question, Choice, Response, QuizTakers
 
-from .models import Choice, Question, UserAnswer
 
-
-class ChoiceInline(admin.StackedInline):
+class ChoiceInline(nested_admin.NestedTabularInline):
     model = Choice
     extra = 4
 
-
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question_text', 'pub_date')
-    fieldsets = [
-        (None,               {'fields': ['question_text']}),
-        (None,               {'fields': ['description_text']}),
-        (None,               {'fields': ['question_image']}),
-        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-    ]
+class QuestionInline(nested_admin.NestedTabularInline):
+    model = Question
     inlines = [ChoiceInline]
+    extra = 10
 
-admin.site.register(Question, QuestionAdmin)
+class QuizAdmin(nested_admin.NestedModelAdmin):
+    inlines = [QuestionInline]
+
+class ResponseInline(admin.TabularInline):
+    model = Response
+
+class QuizTakersAdmin(admin.ModelAdmin):
+    inlines = [ResponseInline]
+
+# class QuizAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'created')
+#     fieldsets = [
+#         (None,               {'fields': ['name']}),
+#         (None,               {'fields': ['questions_count']}),
+#         (None,               {'fields': ['description']}),
+#     ]
+#     inlines = [QuestionInline,]
+
+# admin.site.register(Question, QuestionAdmin)
+
+admin.site.register(Quiz, QuizAdmin)
+admin.site.register(QuizTakers, QuizTakersAdmin)
+admin.site.register(Response)

@@ -3,5 +3,5 @@ from django import forms
 
 class QuizForm(forms.ModelForm):
     class Meta:
-        model = QuizAnswer
+        model = UserAnswer
         fields = ('answer', 'progress')

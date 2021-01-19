@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Question, Choice, UserAnswer
+from .models import Question, Choice, QuizTakers
 
 class QuizView(generic.ListView):
     template_name = 'quiz/quiz.html'
@@ -64,10 +64,8 @@ def results(request, question_id):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id) # gets current question
-    answer = get_object_or_404(UserAnswer) # gets table to store users answers 
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice']) #gets selected choice
-        user_answer = answer.useranswer_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'quiz/detail.html', {
@@ -86,6 +84,11 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))
+
+def select_answer(request, question_id):
+    question = get_object_or_404(Question, pk=question_id) # gets current question
+
+    selection = request.POST('choice')
 
 
 

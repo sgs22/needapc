@@ -48,6 +48,7 @@ urlpatterns = [
     path('logout/', logout_view),
     path('register/', register_view),
     path('admin/', admin.site.urls),
+    path('nested_admin/', include('nested_admin.urls')), #NEWWWW!!
 ]
 
 if settings.DEBUG:
