@@ -11,8 +11,8 @@ from django.dispatch import receiver
 '''
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    questions_count = models.IntegerField(default=10)
-    description = models.CharField(max_length=70)
+    questions_count = models.IntegerField(default=3)
+    description = models.CharField(max_length=255, blank=True, unique=False)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     slug = models.SlugField()
     active = models.BooleanField(default=False)
@@ -28,7 +28,7 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=255, unique=True)
-    description_text = models.TextField(max_length=500, unique=True)
+    description_text = models.TextField(max_length=500, unique=False)
     #question_image = models.ImageField(upload_to='quiz/%Y/%m/%d/', max_length=255, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
@@ -50,7 +50,7 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=255)
-    selected = models.BooleanField(default=False)
+    selected = models.BooleanField(default=False) #may not be needed
 
     class Meta:
         verbose_name = "Choice"
@@ -67,8 +67,8 @@ class Choice(models.Model):
 class QuizTakers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    selected_answers = models.IntegerField(default=0)
-    completed = models.BooleanField(default=False)
+    selected_answers = models.IntegerField(default=0) #may not be needed
+    completed = models.BooleanField(default=False) #may not be needed
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -84,10 +84,10 @@ class QuizTakers(models.Model):
 
 
 
-class Response(models.Model):
+class UserResponse(models.Model):
     quiztaker = models.ForeignKey(QuizTakers, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Choice,on_delete=models.CASCADE,null=True,blank=True)
+    response_option = models.ForeignKey(Choice,on_delete=models.CASCADE,null=True,blank=True)
     
     def __str__(self):
         return self.question.question_text
@@ -96,16 +96,16 @@ class Response(models.Model):
     make sure that the name of the quiz gets slugified and that the questions_count
      in the quiz is always equal to the number of questions related to that quiz
 '''
+@receiver(pre_save, sender=Quiz)
+def slugify_name(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.name)
+
 @receiver(post_save, sender=Quiz)
-def set_default_quiz(sender, instance, created,**kwargs):
+def set_default_quiz(sender, instance, created, **kwargs):
     quiz = Quiz.objects.filter(id = instance.id)
     quiz.update(questions_count=instance.question_set.filter(quiz=instance.pk).count())
 
 @receiver(post_save, sender=Question)
-def set_default(sender, instance, created,**kwargs):
+def set_default(sender, instance, created, **kwargs):
     quiz = Quiz.objects.filter(id = instance.quiz.id)
     quiz.update(questions_count=instance.quiz.question_set.filter(quiz=instance.quiz.pk).count())
-
-@receiver(pre_save, sender=Quiz)
-def slugify_title(sender, instance, *args, **kwargs):
-    instance.slug = slugify(instance.name)

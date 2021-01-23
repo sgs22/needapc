@@ -6,8 +6,21 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 
-from .models import Question
+from .models import Quiz, Question
 
+'''
+    TODO: write test to automate filling in example quiz to check the view renders correctly.
+'''
+
+class QuizModelTest(TestCase):
+
+    def create_quiz(name, slug):
+        time = timezone.now()
+        return Quiz.objects.create(name=name, created=time, slug=slug, active=True)
+
+    def create_question(question_text):
+        time = timezone.now()
+        return Question.objects.create(question_text=question_text, created=time)
 
 class QuestionModelTests(TestCase):
 

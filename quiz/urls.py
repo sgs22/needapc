@@ -3,6 +3,7 @@ from . import views
 
 """
     Url paths extended from from django.urls
+    TODO: add slug of quiz after initial url so that more than one quiz can be added.
 """
 app_name = 'quiz'
 urlpatterns = [
