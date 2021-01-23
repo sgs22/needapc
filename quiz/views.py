@@ -4,18 +4,20 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Question, Choice, QuizTakers
+from .models import Quiz, Question, Choice, QuizTakers
 
+'''
+    TODO: want to get questions for quizes that are active
+'''
 class QuizView(generic.ListView):
     template_name = 'quiz/quiz.html'
     context_object_name = 'question_list'
 
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Question.objects.all()
+    def get_queryset(self, *args, **kwargs):
+        
+        #get questions for active quiz only?
+        queryset = Question.objects.all()
+        return queryset
         
 class DetailView(generic.DetailView):
     model = Question
