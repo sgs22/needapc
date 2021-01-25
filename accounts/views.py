@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
+from quiz.models import UserResponse
 
 
 from .forms import (

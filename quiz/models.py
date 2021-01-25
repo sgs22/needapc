@@ -9,13 +9,19 @@ from django.dispatch import receiver
 '''
     Not sure that more than one quiz is needed as only one quiz will be active on the site at a time
 '''
+
+TYPES = (
+    (1, 'One answer'),
+    (2, 'Multiple answer'),
+    (3, 'Text answer'),
+)
+
 class Quiz(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    questions_count = models.IntegerField(default=3)
+    title = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, blank=True, unique=False)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     slug = models.SlugField()
-    active = models.BooleanField(default=False)
+    active = models.BooleanField('Is active?', default=True, db_index=True)
 
     class Meta:
         ordering = ['created']
@@ -23,17 +29,16 @@ class Quiz(models.Model):
         verbose_name_plural = "Quizzes"
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    type = models.IntegerField(choices=TYPES, default=1, verbose_name='Question Type')
     question_text = models.CharField(max_length=255, unique=True)
-    description_text = models.TextField(max_length=500, unique=False)
-    #question_image = models.ImageField(upload_to='quiz/%Y/%m/%d/', max_length=255, null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
+    description = models.TextField(max_length=500, unique=False)
+    quiz = models.ForeignKey(Quiz, on_delete=models.DO_NOTHING)
 
     class Meta:
-        ordering = ['created']  
+        ordering = ['id']  
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
@@ -48,9 +53,8 @@ class Question(models.Model):
     Could be updated to include linking to a user so that it can be saved
 '''
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=255)
-    selected = models.BooleanField(default=False) #may not be needed
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Question')
 
     class Meta:
         verbose_name = "Choice"
@@ -67,8 +71,6 @@ class Choice(models.Model):
 class QuizTakers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    selected_answers = models.IntegerField(default=0) #may not be needed
-    completed = models.BooleanField(default=False) #may not be needed
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -77,11 +79,6 @@ class QuizTakers(models.Model):
     
     def __str__(self):
         return self.user.username
-
-    # def quiz_completed():
-    #     if selected_answers != questions_count:
-    #         completed = False
-
 
 
 class UserResponse(models.Model):
@@ -98,14 +95,14 @@ class UserResponse(models.Model):
 '''
 @receiver(pre_save, sender=Quiz)
 def slugify_name(sender, instance, *args, **kwargs):
-    instance.slug = slugify(instance.name)
+    instance.slug = slugify(instance.title)
 
-@receiver(post_save, sender=Quiz)
-def set_default_quiz(sender, instance, created, **kwargs):
-    quiz = Quiz.objects.filter(id = instance.id)
-    quiz.update(questions_count=instance.question_set.filter(quiz=instance.pk).count())
+# @receiver(post_save, sender=Quiz)
+# def set_default_quiz(sender, instance, created, **kwargs):
+#     quiz = Quiz.objects.filter(id = instance.id)
+#     quiz.update(questions_count=instance.question_set.filter(quiz=instance.pk).count())
 
-@receiver(post_save, sender=Question)
-def set_default(sender, instance, created, **kwargs):
-    quiz = Quiz.objects.filter(id = instance.quiz.id)
-    quiz.update(questions_count=instance.quiz.question_set.filter(quiz=instance.quiz.pk).count())
+# @receiver(post_save, sender=Question)
+# def set_default(sender, instance, created, **kwargs):
+#     quiz = Quiz.objects.filter(id = instance.quiz.id)
+#     quiz.update(questions_count=instance.quiz.question_set.filter(quiz=instance.quiz.pk).count())
