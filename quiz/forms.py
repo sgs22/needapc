@@ -1,5 +1,5 @@
+from django.db import models
 from django.forms import ModelForm
-from django import forms
 from .models import Quiz, Question, Choice
 
 '''
@@ -16,5 +16,3 @@ from .models import Quiz, Question, Choice
     #     model = Choice
     #     fields = ['question', 'question_text']
 
-    class QuizForm(forms.Form):
-        

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'featured',
     'quiz',
     'accounts',
-    'nested_admin' # ------- NEW
+    'nested_admin', # ------- NEW
+    'questionary'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
-
+<!-- Form for quiz template to take inspo from https://jthemes.net/themes/html/wizard-form/v1/-->
 {% block content %}
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <section id="quiz">
     <div id="q1" class="text-center white">
       <div class="padding-y mt-6">
@@ -29,7 +29,7 @@
   {% for object in choice_list %}
         <li><a href="/quiz/ {{ object.id }}/">{{ object.choice_text }}</a></li>
   {% endfor %}
-</div>
+</div> -->
 {% if question_list %}
 <ul>
   {% for question in question_list %}
