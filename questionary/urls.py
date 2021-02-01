@@ -6,5 +6,6 @@ from django.urls import path
 """
 app_name = 'questionary'
 urlpatterns = [
-    path('quest/', views.show_quests, name='quest')
+    path('quest/', views.show_quests, name='quest'),
+    path('response/', views.response_view, name='response')
 ]

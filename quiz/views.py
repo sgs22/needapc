@@ -6,9 +6,31 @@ from django.utils import timezone
 
 from .models import Quiz, Question, Choice, QuizTakers
 
+from .forms import MyForm
+
 '''
     TODO: want to get questions for quizes that are active
 '''
+
+def answer(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = MyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/quiz/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = MyForm()
+
+    return render(request, '/quiz/quiz.html', {'form': form})
+
+
 class QuizView(generic.ListView):
     template_name = 'quiz/quiz.html'
     context_object_name = 'question_list'

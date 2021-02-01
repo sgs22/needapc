@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
+
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
 
@@ -17,7 +20,10 @@ class Questionary(models.Model):
     active = models.BooleanField(default=True, db_index=True)
     questions = models.ManyToManyField(Question, null=True)
 
+ANSWER_OPTIONS = Choice.objects.all()
+
 class UserResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) #user associated with answering
-    response = models.ManyToManyField(Choice) # the choices they selected
-    response_date = models.DateTimeField(blank=True, null=True) # the datetime when they did the quiz
+    response = models.CharField(max_length=2,choices=ANSWER_OPTIONS, null=True)
+    #response = models.CharField(max_length=2,choices=ANSWER_OPTIONS, null=True)
+    #year_in_school = models.CharField(max_length=2,choices=YEAR_IN_SCHOOL_CHOICES,default=FRESHMAN,)

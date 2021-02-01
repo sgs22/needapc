@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from .models import Choice, Question, Questionary
+from .models import Choice, Question, Questionary, UserResponse
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 from django.template.loader import get_template
-from django.http import HttpResponse, Http404
 from django.template import loader
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+
+from .forms import ResponseForm
 
 def show_quests(request):
     quests = Questionary.objects.all()
@@ -12,4 +17,14 @@ def show_quests(request):
     return render(request, 'questionary/quest.html', {'quest': quest })
 
 
-# def choose(request):
+@login_required
+def response_view(request):
+    form = ResponseForm(request.POST)
+    if form.is_valid():
+        response = form.save(commit=False)
+        response.user = request.user
+        response.save()
+    
+    context = {'form' : form }
+    return render(request, "questionary/response.html", context)
+

@@ -47,5 +47,11 @@
 {% endfor %}
 </ul>
 
+<form action="/quiz/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+
 {% endblock content %}
 
