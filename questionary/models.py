@@ -1,9 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+#TODO: ratehr than manually assigning options in model
+#    - initilaise the form with choices made for each question
 
+BUDGET_OPTIONS = ( 
+    ("1", "250-300"), 
+    ("2", "300-500"), 
+    ("3", "500-750"), 
+    ("4", "1000-1500"), 
+    ("5", "1500+"), 
+) 
 
+USAGE_OPTIONS = ( 
+    ("1", "Work"), 
+    ("2", "School"), 
+    ("3", "Leisure/Hobby"), 
+    ("4", "Everything"), 
+) 
 
+WORKFLOW_OPTIONS = ( 
+    ("1", "1-2 Apps"), 
+    ("2", "2-4 Apps"), 
+    ("3", "5+ Apps"), 
+) 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
 
@@ -20,10 +40,10 @@ class Questionary(models.Model):
     active = models.BooleanField(default=True, db_index=True)
     questions = models.ManyToManyField(Question, null=True)
 
-ANSWER_OPTIONS = Choice.objects.all()
-
 class UserResponse(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) #user associated with answering
-    response = models.CharField(max_length=2,choices=ANSWER_OPTIONS, null=True)
-    #response = models.CharField(max_length=2,choices=ANSWER_OPTIONS, null=True)
-    #year_in_school = models.CharField(max_length=2,choices=YEAR_IN_SCHOOL_CHOICES,default=FRESHMAN,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    response_1 = models.CharField(max_length=20,choices=BUDGET_OPTIONS)
+    response_2 = models.CharField(max_length=20,choices=USAGE_OPTIONS)
+    response_3 = models.CharField(max_length=20,choices=WORKFLOW_OPTIONS)
+    response_4 = models.CharField(max_length=200, null=True)
+    
