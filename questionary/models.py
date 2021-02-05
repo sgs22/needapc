@@ -27,6 +27,9 @@ WORKFLOW_OPTIONS = (
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.choice_text
+
 class Question(models.Model):
     question_text = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=500, unique=False)
@@ -46,4 +49,10 @@ class UserResponse(models.Model):
     response_2 = models.CharField(max_length=20,choices=USAGE_OPTIONS)
     response_3 = models.CharField(max_length=20,choices=WORKFLOW_OPTIONS)
     response_4 = models.CharField(max_length=200, null=True)
+    response_5 = models.CharField(max_length=200, null = True)
+    response_6 = models.CharField(max_length=200, null=True)
+    response_7 = models.CharField(max_length=200, null=True)
+
+    # def __str__(self):
+    #     return self.id
     

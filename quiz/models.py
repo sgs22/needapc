@@ -54,7 +54,7 @@ class Question(models.Model):
 '''
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Question')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question',verbose_name='Question')
 
     class Meta:
         verbose_name = "Choice"
@@ -68,26 +68,27 @@ class Choice(models.Model):
     NOTE: dont need questions here as they are only important for getting the answer
             and can be taken from the foreign key of the answer? 
 '''
-class QuizTakers(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now_add=True)
+# class QuizTakers(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+#     timestamp = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        verbose_name = "QuizTaker"
-        verbose_name_plural = "QuizTakers"
+#     class Meta:
+#         verbose_name = "QuizTaker"
+#         verbose_name_plural = "QuizTakers"
     
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 class UserResponse(models.Model):
-    quiztaker = models.ForeignKey(QuizTakers, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    response_option = models.ForeignKey(Choice,on_delete=models.CASCADE,null=True,blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quiztaker',null=True)
+    #question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    response_1 = models.CharField(max_length=200, null=True)
+    response_2 = models.CharField(max_length=200, null=True)
     
-    def __str__(self):
-        return self.question.question_text
+    # def __str__(self):
+    #     return self.question.question_text
 
 '''
     make sure that the name of the quiz gets slugified and that the questions_count

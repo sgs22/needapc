@@ -3,32 +3,46 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
-from .models import Quiz, Question, Choice, QuizTakers
+from .models import Quiz, Question, Choice, UserResponse
 
-from .forms import MyForm
+from .forms import ResponseForm
 
 '''
     TODO: want to get questions for quizes that are active
 '''
-
-def answer(request):
-    # if this is a POST request we need to process the form data
+@login_required
+def response_view(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = MyForm(request.POST)
-        # check whether it's valid:
+        form = ResponseForm(request.POST)
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/quiz/')
-
-    # if a GET (or any other method) we'll create a blank form
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('/')
     else:
-        form = MyForm()
+        form = ResponseForm()
+    return render(request, 'quiz/response.html', {'form': form})
 
-    return render(request, '/quiz/quiz.html', {'form': form})
+
+# def answer(request):
+#     # if this is a POST request we need to process the form data
+#     if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+#         form = MyForm(request.POST)
+#         # check whether it's valid:
+#         if form.is_valid():
+#             # process the data in form.cleaned_data as required
+#             # ...
+#             # redirect to a new URL:
+#             return HttpResponseRedirect('/quiz/')
+
+#     # if a GET (or any other method) we'll create a blank form
+#     else:
+#         form = MyForm()
+
+#     return render(request, '/quiz/quiz.html', {'form': form})
 
 
 class QuizView(generic.ListView):
