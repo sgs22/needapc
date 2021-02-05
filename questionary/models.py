@@ -33,7 +33,7 @@ class Choice(models.Model):
 class Question(models.Model):
     question_text = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=500, unique=False)
-    choices = models.ManyToManyField(Choice, null=True)
+    choices = models.ManyToManyField(Choice)
 
 class Questionary(models.Model):
     title = models.CharField(max_length=255, unique=True)
@@ -41,7 +41,7 @@ class Questionary(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     slug = models.SlugField()
     active = models.BooleanField(default=True, db_index=True)
-    questions = models.ManyToManyField(Question, null=True)
+    questions = models.ManyToManyField(Question)
 
 class UserResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
