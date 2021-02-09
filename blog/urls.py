@@ -8,5 +8,5 @@ from django.urls import path
 # app_name = 'blog' 
 urlpatterns = [
     path('blog/', views.PostList.as_view(), name='blog'),
-    path("blog/<slug:slug>/", views.post_detail, name="post_detail") #copy for quiz
+    path("blog/<slug:slug>/", views.post_detail, name="post_detail")
 ]

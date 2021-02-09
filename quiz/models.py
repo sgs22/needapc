@@ -20,8 +20,8 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, blank=True, unique=False)
     created = models.DateTimeField(auto_now_add=True, editable=False)
-    slug = models.SlugField()
-    active = models.BooleanField('Is active?', default=True, db_index=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    active = models.BooleanField(default=True, db_index=True)
 
     class Meta:
         ordering = ['created']
@@ -33,12 +33,13 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     type = models.IntegerField(choices=TYPES, default=1, verbose_name='Question Type')
+    question_number = models.IntegerField(blank=True, null=True)
     question_text = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=500, unique=False)
-    quiz = models.ForeignKey(Quiz, on_delete=models.DO_NOTHING)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['id']  
+        ordering = ['question_number']  
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
@@ -63,29 +64,12 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-'''
-    Model to store answers given by participant.
-    NOTE: dont need questions here as they are only important for getting the answer
-            and can be taken from the foreign key of the answer? 
-'''
-# class QuizTakers(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-#     timestamp = models.DateTimeField(auto_now_add=True)
-
-#     class Meta:
-#         verbose_name = "QuizTaker"
-#         verbose_name_plural = "QuizTakers"
-    
-#     def __str__(self):
-#         return self.user.username
-
-
 class UserResponse(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quiztaker',null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user',null=True)
     #question = models.ForeignKey(Question, on_delete=models.CASCADE)
     response_1 = models.CharField(max_length=200, null=True)
     response_2 = models.CharField(max_length=200, null=True)
+    response_3 = models.CharField(max_length=200, null=True)
     
     # def __str__(self):
     #     return self.question.question_text
@@ -98,12 +82,3 @@ class UserResponse(models.Model):
 def slugify_name(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.title)
 
-# @receiver(post_save, sender=Quiz)
-# def set_default_quiz(sender, instance, created, **kwargs):
-#     quiz = Quiz.objects.filter(id = instance.id)
-#     quiz.update(questions_count=instance.question_set.filter(quiz=instance.pk).count())
-
-# @receiver(post_save, sender=Question)
-# def set_default(sender, instance, created, **kwargs):
-#     quiz = Quiz.objects.filter(id = instance.quiz.id)
-#     quiz.update(questions_count=instance.quiz.question_set.filter(quiz=instance.quiz.pk).count())

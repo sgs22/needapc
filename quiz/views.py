@@ -10,7 +10,17 @@ from .models import Quiz, Question, Choice, UserResponse
 from .forms import ResponseForm
 
 '''
-    TODO: want to get questions for quizes that are active
+    List of all available "quizzes"
+'''
+# class QuizList(generic.ListView):
+#     queryset = Quiz.objects.filter(active=True).order_by('id')
+#     template_name = 'quiz/quiz.html'
+
+# class QuizDetail(generic.DetailView):
+#     model = UserResponse
+#     template_name = 'quiz/quiz_detail.html'
+'''
+    single quiz view
 '''
 @login_required
 def response_view(request):
