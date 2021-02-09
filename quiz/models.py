@@ -55,7 +55,7 @@ class Question(models.Model):
 '''
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question',verbose_name='Question')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question')
 
     class Meta:
         verbose_name = "Choice"

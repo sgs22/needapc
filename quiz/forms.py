@@ -26,6 +26,15 @@ class ResponseForm(ModelForm):
     response_2 = forms.ModelMultipleChoiceField(queryset=Choice.objects.filter(question__question_number=2), widget=forms.CheckboxSelectMultiple()) 
     response_3 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=3), widget=forms.RadioSelect(attrs={}))
 
+
+
+
+
+
+
+
+
+
     #forms.ModelChoiceField(queryset=Choice.questions.all(), widget=forms.RadioSelect(attrs={}))
 
     #choice = forms.ChoiceField(choices=[(choice.pk, choice) for choice in MyChoices.objects.all()])
