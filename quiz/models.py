@@ -17,8 +17,8 @@ TYPES = (
 )
 
 class Quiz(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    description = models.CharField(max_length=255, blank=True, unique=False)
+    title = models.CharField(max_length=255, unique=True, verbose_name="Title (don't edit)")
+    description = models.CharField(max_length=255, blank=True, unique=False, null=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     slug = models.SlugField(max_length=200, unique=True)
     active = models.BooleanField(default=True, db_index=True)
@@ -32,10 +32,10 @@ class Quiz(models.Model):
         return self.title
 
 class Question(models.Model):
-    type = models.IntegerField(choices=TYPES, default=1, verbose_name='Question Type')
+    type = models.IntegerField(choices=TYPES, default=1, verbose_name='Question Type', null=False)
     question_number = models.PositiveIntegerField(blank=True, null=True)
     question_text = models.CharField(max_length=255, unique=True)
-    description = models.TextField(max_length=500, unique=False)
+    description = models.TextField(max_length=500, unique=False, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     class Meta:

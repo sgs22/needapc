@@ -19,8 +19,6 @@ class ResponseInline(admin.TabularInline):
     model = UserResponse
     extra = 0
 
-# class QuizTakersAdmin(admin.ModelAdmin):
-#     inlines = [ResponseInline]
 
 # class QuizAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'created')
@@ -34,5 +32,4 @@ class ResponseInline(admin.TabularInline):
 # admin.site.register(Question, QuestionAdmin)
 
 admin.site.register(Quiz, QuizAdmin)
-# admin.site.register(QuizTakers, QuizTakersAdmin)
 admin.site.register(UserResponse)
