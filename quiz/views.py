@@ -12,16 +12,32 @@ from .forms import ResponseForm
 '''
     List of all available "quizzes"
 '''
-# class QuizList(generic.ListView):
-#     queryset = Quiz.objects.filter(active=True).order_by('id')
-#     template_name = 'quiz/quiz.html'
+class QuizList(generic.ListView):
+    queryset = Quiz.objects.filter(active=True).order_by('id')
+    template_name = 'quiz/quiz.html'
 
-# class QuizDetail(generic.DetailView):
-#     model = UserResponse
-#     template_name = 'quiz/quiz_detail.html'
+class QuizDetail(generic.DetailView):
+    model = Quiz
+    template_name = 'quiz/quiz_detail.html'
 '''
     single quiz view
 '''
+@login_required
+def quiz_detail(request, slug):
+    template_name = 'quiz/quiz_detail.html'
+    quiz = get_object_or_404(Quiz, slug=slug)
+    if request.method == 'POST':
+        form = ResponseForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.save()
+            return redirect('/')
+    else:
+        form = ResponseForm()
+    return render(request, template_name, {'quiz':quiz,
+                                           'form': form})
+
 @login_required
 def response_view(request):
     if request.method == 'POST':

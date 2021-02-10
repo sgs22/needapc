@@ -22,9 +22,9 @@ class ResponseForm(ModelForm):
         fields = ('response_1','response_2','response_3',)
         exclude = ('user',)
 
-    response_1 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=1), widget=forms.RadioSelect(attrs={}))
-    response_2 = forms.ModelMultipleChoiceField(queryset=Choice.objects.filter(question__question_number=2), widget=forms.CheckboxSelectMultiple()) 
-    response_3 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=3), widget=forms.RadioSelect(attrs={}))
+    response_1 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop Quiz"), widget=forms.RadioSelect(attrs={}))
+    response_2 = forms.ModelMultipleChoiceField(queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop Quiz"), widget=forms.CheckboxSelectMultiple()) 
+    response_3 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop Quiz"), widget=forms.RadioSelect(attrs={}))
 
 
 

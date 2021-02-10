@@ -33,7 +33,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     type = models.IntegerField(choices=TYPES, default=1, verbose_name='Question Type')
-    question_number = models.IntegerField(blank=True, null=True)
+    question_number = models.PositiveIntegerField(blank=True, null=True)
     question_text = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=500, unique=False)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -56,6 +56,7 @@ class Question(models.Model):
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz') #needed for fitlering forms 
 
     class Meta:
         verbose_name = "Choice"
@@ -66,13 +67,10 @@ class Choice(models.Model):
 
 class UserResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user',null=True)
-    #question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    #question = models.ForeignKey(Question, on_delete=models.CASCADE) quiz might need to be here...
     response_1 = models.CharField(max_length=200, null=True)
     response_2 = models.CharField(max_length=200, null=True)
     response_3 = models.CharField(max_length=200, null=True)
-    
-    # def __str__(self):
-    #     return self.question.question_text
 
 '''
     make sure that the name of the quiz gets slugified and that the questions_count
