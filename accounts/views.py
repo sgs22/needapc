@@ -1,13 +1,20 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import update_session_auth_hash
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, logout
+
+from django.http import JsonResponse
 from quiz.models import UserResponse
+
 
 
 from .forms import (
@@ -70,14 +77,41 @@ def register_view(request):
     MAY HAVE TO SWITCH TO OLD FORM WITH AJAX FOR NOW
     
 """
-@login_required
-def accounts(request):
-    return render(request, 'accounts/accounts.html')
-
 class SignUpView(CreateView):
     template_name = 'accounts/signup.html'
     form_class = RegisterForm
     success_url = reverse_lazy('accounts')
+
+
+@login_required
+def accounts(request):
+    return render(request, 'accounts/accounts.html')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
+
+
+
+
+
+
+
+
 
     def form_valid(self, form):
         valid = super().form_valid(form)

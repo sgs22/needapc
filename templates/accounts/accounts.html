@@ -32,43 +32,15 @@
           <tbody>
             <tr>
               <th scope="row">Name: </th>
-              <td>{{ user.username }}</td>
+              <td>{{ user.first_name }} {{ user.last_name }}</td>
             </tr>
             <tr>
-              <th scope="row">Email</th>
+              <th scope="row">Email:</th>
               <td>{{ user.email }}</td>
             </tr>
             <tr>
               <th scope="row">Change Password:</th>
-              <td>{{ object.modelnumber }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-borderless">
-        </table>
-    </div>
-  </div>
-  <div class="row"> <!-- User Response Table / ONLY GET LOGGED -->
-    <div class="col">
-      <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">User Information</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Name: </th>
-              <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Email</th>
-              <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Change Password:</th>
-              <td>{{ object.modelnumber }}</td>
+              <td><a href="/accounts/change_password/" class="btn btn-warning">Update</a></td>
             </tr>
           </tbody>
         </table>
