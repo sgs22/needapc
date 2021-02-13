@@ -14,7 +14,8 @@ from .models import Quiz, Question, Choice, UserResponse
     https://www.agiliq.com/blog/2014/04/django-backward-relationship-lookup/
 
 '''
-
+question_instance = Question.objects.filter(question_number=1)
+question_name = question_instance.values('question_text')
 
 class ResponseForm(ModelForm):
     class Meta:
@@ -22,9 +23,15 @@ class ResponseForm(ModelForm):
         fields = ('response_1','response_2','response_3',)
         exclude = ('user',)
 
-    response_1 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"), widget=forms.RadioSelect(attrs={}))
-    response_2 = forms.ModelMultipleChoiceField(queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"), widget=forms.CheckboxSelectMultiple()) 
-    response_3 = forms.ModelChoiceField(queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop"), widget=forms.RadioSelect(attrs={}))
+    response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),
+                                        queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
+                                        widget=forms.RadioSelect(attrs={}))
+    response_2 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"),
+                                        queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
+                                        widget=forms.CheckboxSelectMultiple()) 
+    response_3 = forms.ModelChoiceField(label=Question.objects.get(question_number=3,quiz__title="Laptop"),
+                                        queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop"), 
+                                        widget=forms.RadioSelect(attrs={}))
 
 
 
