@@ -39,12 +39,12 @@ from accounts.views import (
 
 urlpatterns = [
     path('', home_view),
-    path('', include('quiz.urls')),
-    path('', include('featured.urls')),
-    path('', include('accounts.urls')),
-    path('', include('products.urls')),
-    path('', include('blog.urls')),
-    path('', include('questionary.urls')),
+    path('', include('quiz.urls', namespace="quiz")),
+    path('', include('featured.urls', namespace="featured")),
+    path('', include('accounts.urls', namespace="accounts")),
+    path('', include('products.urls', namespace="products")),
+    path('', include('blog.urls', namespace="blog")),
+    #path('', include('questionary.urls', namespace="quiz")),
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),

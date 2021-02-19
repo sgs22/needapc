@@ -13,9 +13,11 @@ from .models import Quiz, Question, Choice, UserResponse
     https://docs.djangoproject.com/en/dev/topics/db/queries/#lookups-that-span-relationships
     https://www.agiliq.com/blog/2014/04/django-backward-relationship-lookup/
 
+    TODO: ADD additional forms for other quizzes i.e. one for Laptop one for Desktop.
+
 '''
-question_instance = Question.objects.filter(question_number=1)
-question_name = question_instance.values('question_text')
+# question_instance = Question.objects.filter(question_number=1)
+# question_name = question_instance.values('question_text')
 
 class ResponseForm(ModelForm):
     class Meta:

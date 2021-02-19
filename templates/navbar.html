@@ -13,13 +13,13 @@
       <a class="navbar-brand" href="/">needapc</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-2">
         <li class="nav-item pl-1 pr-1">
-          <a class="nav-link" href="/quiz/">Quiz</a>
+          <a class="nav-link" href="{% url 'quiz:quiz_list' %}">Quiz</a>
         </li>
         <li class="nav-item pl-1 pr-1">
-          <a class="nav-link" href="/featured/">Featured</a>
+          <a class="nav-link" href="{% url 'featured:featured' %}">Featured</a>
         </li>
         <li class="nav-item pl-1 pr-1">
-          <a class="nav-link" href="/products/">Products</a>
+          <a class="nav-link" href="{% url 'products:products' %}">Products</a>
         </li>
         <li class="nav-item dropdown pl-1 pr-1">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@
             </div>
         </li>
         <li class="nav-item pl-1 pr-1">
-            <a class="nav-link" href="/blog/">Blog</a>
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
         </li>
         <li class="nav-item pl-1 pr-1">
           <a class="nav-link" href="/admin/">Admin</a>

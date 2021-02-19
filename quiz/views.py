@@ -37,19 +37,31 @@ def quiz_detail(request, slug):
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
                                            'form': form})
+#get response for this user user.request
 
 @login_required
-def response_view(request):
-    if request.method == 'POST':
-        form = ResponseForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.user = request.user
-            form.save()
-            return redirect('/')
-    else:
-        form = ResponseForm()
-    return render(request, 'quiz/response.html', {'form': form})
+def results_view(request):
+    response = UserResponse.objects.filter(user=request.user)
+    return render(request, 'quiz/results.html', {'response':response})
+
+
+# def results(request, question_id):
+# question = get_object_or_404(Question, pk=question_id)
+# return render(request, 'quiz/results.html', {'question': question})
+
+
+# @login_required
+# def response_view(request):
+#     if request.method == 'POST':
+#         form = ResponseForm(request.POST)
+#         if form.is_valid():
+#             form = form.save(commit=False)
+#             form.user = request.user
+#             form.save()
+#             return redirect('/')
+#     else:
+#         form = ResponseForm()
+#     return render(request, 'quiz/response.html', {'form': form})
 
 
 # def answer(request):
