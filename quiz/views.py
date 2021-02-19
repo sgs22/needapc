@@ -32,17 +32,20 @@ def quiz_detail(request, slug):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('/')
+            return redirect('/') #will be changed to results page
     else:
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
                                            'form': form})
 #get response for this user user.request
 
-@login_required
-def results_view(request):
+
+def results_view(request, id=None, *args, **kwargs):
+    question = Question.objects.filter(quiz__title="Laptop")
     response = UserResponse.objects.filter(user=request.user)
-    return render(request, 'quiz/results.html', {'response':response})
+    return render(request, "quiz/results.html", {'response': response,
+                                                'question': question})
+
 
 
 # def results(request, question_id):
@@ -129,12 +132,8 @@ def results(request, question_id):
 #             'error_message': "You didn't select a choice.",
 #         })
 #     else:
-#         selected_choice.votes += 1
-#         selected_choice.save()
-#         # Always return an HttpResponseRedirect after successfully dealing
-#         # with POST data. This prevents data from being posted twice if a
-#         # user hits the Back button.
-#         return HttpResponseRedirect(reverse('quiz:results', args=(question.id,)))
+#        
+# )
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id) # gets current question
