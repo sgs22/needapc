@@ -4,50 +4,37 @@
 
 
 {% block content %}
-<!-- <h1>{{ user.first_name }}, here are your results...</h1>
-{% for object in response %}
-  <h3>{{object.response_1}}</h3>
-{% endfor %}
-{% for object in question %}
-  <h3>{{object.question_text}}</h3>
-{% endfor %} -->
+
 <div class="row">
-    <div class="col">
-      <div class="mx-auto">
-          <h1>Your answers:</h1>
-      </div>
-      <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Question:</th>
-              <th scope="col">You Said:</th>
-            </tr>
-          </thead>
-          <tbody>
-          <!-- DEFINE CUSTOM TAG -->
-          {% for object in response %} 
-            {% for object in question %}
-            <tr>
-              <th scope="row">{{object.question_text}}:</th>
-              
-              <td>{{object.response_1}}</td>
-            </tr>
-            {% endfor %}
-          {% endfor %}
-            <!-- <tr>
-              <th scope="row">Question 2: </th>
-              <td>{{response.response_2 }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Question 3: </th>
-              <td>{{response.response_3 }}</td>
-            </tr> -->
-          </tbody>
-        </table>
-        <table class="table table-borderless">
-        </table>
+  <div class="col">
+    <div class="mx-auto">
+        <h1>This is what you've told us:</h1>
     </div>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Your choices:</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- DEFINE CUSTOM TAG -->
+        {% for response in responses %} 
+          <tr>
+            <td>{{response.response_1}}</td>
+          </tr>
+          <tr>
+            <td>{{response.response_2 }}</td>
+          </tr>
+          <tr>
+            <td>{{response.response_3 }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <table class="table table-borderless">
+      </table>
   </div>
+</div>
 
 
 
@@ -60,3 +47,40 @@
 </ul> -->
 
 <!-- <a href="{% url 'quiz:detail' question.id %}">Vote again?</a> -->
+
+
+
+
+
+<div class="row">
+  <div class="col">
+    <div class="mx-auto">
+      <h1>This is what you've told us {{ user.first_name }}...</h1>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Question:</th>
+            <th scope="col">You Said:</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- DEFINE CUSTOM TAG -->
+          {% for question in questions %}
+          <tr>
+            <th scope="row">{{question.question_text}}:</th>
+            <td></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <table class="table table-borderless">
+      </table>
+  </div>
+</div>
+
+
+
+
+

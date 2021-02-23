@@ -41,10 +41,10 @@ def quiz_detail(request, slug):
 
 
 def results_view(request, id=None, *args, **kwargs):
-    question = Question.objects.filter(quiz__title="Laptop")
-    response = UserResponse.objects.filter(user=request.user)
-    return render(request, "quiz/results.html", {'response': response,
-                                                'question': question})
+    questions = Question.objects.filter(quiz__title="Laptop")
+    responses = UserResponse.objects.filter(user=request.user)
+    return render(request, "quiz/results.html", {'responses': responses,
+                                                'questions': questions})
 
 
 
