@@ -58,7 +58,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+#db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -130,8 +130,8 @@ dmypy.json
 
 # Static and Media root
 media_cdn/
-static/
+#static/
 
 # Vscode workspace
-needapc.code-workspace
+#needapc.code-workspace
 
