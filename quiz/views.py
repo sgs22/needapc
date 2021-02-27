@@ -32,7 +32,7 @@ def quiz_detail(request, slug):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('/') #will be changed to results page
+            return redirect('/quiz/laptops/results') #will be changed to results page
     else:
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
@@ -40,9 +40,29 @@ def quiz_detail(request, slug):
 #get response for this user user.request
 
 
-def results_view(request, id=None, *args, **kwargs):
+# def results_view(request, *args, **kwargs):
+#     questions = Question.objects.filter(quiz__title="Laptop")
+#     responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object
+#     return render(request, "quiz/results.html", {'responses': responses,
+#                                                 'questions': questions})
+
+'''
+    Presents user with the choices they made in the quiz
+    then:     - users responses so that logic can be performed for user results (converts querysets to str/int)
+              - logic performed on each response     
+              - TODO: import products to filter them based on responses using products attributes
+                        e.g. if user responds to question saying they will commute a lot then weight of 
+                                products should be less than x kilos (<2kgs)
+
+'''
+def results_view(request, *args, **kwargs):
     questions = Question.objects.filter(quiz__title="Laptop")
-    responses = UserResponse.objects.filter(user=request.user)
+    responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object placed into db
+    
+    response_1 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_1', flat=True).get()
+    response_2 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_2', flat=True).get()
+    response_3 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_3', flat=True).get()
+    print(int(response_1),response_2, response_3) #logic for filtering out products based on user budget input
     return render(request, "quiz/results.html", {'responses': responses,
                                                 'questions': questions})
 
