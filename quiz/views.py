@@ -69,6 +69,7 @@ def results_view(request, *args, **kwargs):
     response_3 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_3', flat=True).get()
     print(int(response_1),response_2, response_3) #logic for filtering out products based on user budget input
     
+    #HARD CODED REPOSNSES DIRECTLY LINKED TO QUESTION INPUT
     #will return 3 products from db currently only filter based on price and return 3 products
 
     result = ProductDetail.objects.filter(price__lte=response_1)[:3]
