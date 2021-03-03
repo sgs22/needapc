@@ -5,6 +5,55 @@
 
 {% block content %}
 
+<h3 class="text-center p-4">Results:</h3>
+
+<table class="center text-center table table-bordered table-hover table-dark" style="width: 80%">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for result in results %} 
+      <tr>
+        <th scope="row">{{ result.id }}</th>
+        {% if result.image %}
+        <td><img src="{{ object.image.url }}" class="img-thumbnail" width="125px"></td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td><a href="/products/{{ result.id }}" class="card-link">{{ result.name }}</a></td>
+        <td>£{{ result.price }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
 
 {% endblock content %}
 
+
+
+
+
+  <table class="center text-center table table-bordered table-hover table-dark" style="width: 80%";>
+    <thead>
+      <tr>
+        <th scope="col">In order of recommendation:</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- DEFINE CUSTOM TAG -->
+    {% for result in results %} 
+      <tr>
+        <td>{{result.name}}</td>
+        <td>{{result.price}}</td>
+        <td>{{result.url}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
