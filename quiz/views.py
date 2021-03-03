@@ -5,6 +5,8 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
+from products.models import ProductDetail
+
 from .models import Quiz, Question, Choice, UserResponse
 
 from .forms import ResponseForm
@@ -32,7 +34,7 @@ def quiz_detail(request, slug):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('/quiz/laptops/results') #will be changed to results page
+            return redirect('/quiz/laptops/overview') #will be changed to results page
     else:
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
@@ -55,16 +57,22 @@ def quiz_detail(request, slug):
                                 products should be less than x kilos (<2kgs)
 
 '''
-def results_view(request, *args, **kwargs):
+def overview_view(request, *args, **kwargs):
     questions = Question.objects.filter(quiz__title="Laptop")
     responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object placed into db
-    
+    return render(request, "quiz/overview.html", {'responses': responses,
+                                                'questions': questions})
+
+def results_view(request, *args, **kwargs):
     response_1 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_1', flat=True).get()
     response_2 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_2', flat=True).get()
     response_3 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_3', flat=True).get()
     print(int(response_1),response_2, response_3) #logic for filtering out products based on user budget input
-    return render(request, "quiz/results.html", {'responses': responses,
-                                                'questions': questions})
+    #will return 3 products from db
+
+    result = ProductDetail.objects.all()[:3]
+    return render(request, "quiz/result.html", {'results': results})
+    
 
 
 
