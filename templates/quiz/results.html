@@ -18,13 +18,13 @@
     <tbody>
     {% for result in results %} 
       <tr>
-        <th scope="row"><a href="/products/{{ result.id }}" class="card-link">{{ result.name }}</a></th>
+        <th scope="row" class="align-middle"><a href="/products/{{ result.id }}" class="card-link">{{ result.name }}</a></th>
         {% if result.image %}
-        <td><img src="{{ object.image.url }}" class="img-thumbnail" width="125px"></td>
+        <td class="align-middle"><img src="{{ result.image.url }}" class="img-thumbnail" width="125px"></td>
         {% else %}
         <td></td>
         {% endif %}
-        <td>£{{ result.price }}</td>
+        <td class="align-middle">£{{ result.price }}</td>
       </tr>
     {% endfor %}
     </tbody>
