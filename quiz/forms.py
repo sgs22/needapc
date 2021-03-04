@@ -28,6 +28,7 @@ class ResponseForm(ModelForm):
     response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),
                                         queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
                                         widget=forms.RadioSelect(attrs={}))
+    #FilteredSelectMultiple?
     response_2 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"),
                                         queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
                                         widget=forms.CheckboxSelectMultiple()) 
