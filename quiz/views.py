@@ -71,7 +71,7 @@ def results_view(request, *args, **kwargs):
     
     #HARD CODED REPOSNSES DIRECTLY LINKED TO QUESTION INPUT
     #will return 3 products from db currently only filter based on price and return 3 products
-    if int(response_1 ) < 350:
+    if int(response_1) < 350:
         print("recommend going used")
     else:
         print("fail")
