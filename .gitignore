@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Static and Media root
-media_cdn/
+#media_cdn/
 #static/
 
 # Vscode workspace
