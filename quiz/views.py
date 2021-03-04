@@ -71,8 +71,12 @@ def results_view(request, *args, **kwargs):
     
     #HARD CODED REPOSNSES DIRECTLY LINKED TO QUESTION INPUT
     #will return 3 products from db currently only filter based on price and return 3 products
-
-    result = ProductDetail.objects.filter(price__lte=response_1)[:3]
+    if int(response_1 ) < 350:
+        print("recommend going used")
+    else:
+        print("fail")
+    result = ProductDetail.objects.filter(price__lte=response_1)[:3] #budget
+    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #weight
     print(result)
     return render(request, "quiz/results.html", {'results': result})
     
