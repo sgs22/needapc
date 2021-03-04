@@ -13,4 +13,5 @@
 #     )
 #     class Meta:
 #         model = ProductDetail
-#         fields = ['name']      
+#         fields = ['name']    
+# test123  
