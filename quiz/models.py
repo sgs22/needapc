@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+
+from django.utils.translation import gettext_lazy as _
 '''
     Not sure that more than one quiz is needed as only one quiz will be active on the site at a time
 '''
@@ -71,6 +73,31 @@ class UserResponse(models.Model):
     response_1 = models.CharField(max_length=200, null=True)
     response_2 = models.CharField(max_length=200, null=True)
     response_3 = models.CharField(max_length=200, null=True)
+
+class Application(models.Model):
+    #categorise apps based on how resource intensive they are on the CPU/GPU.
+    class AppType(models.TextChoices):
+        LOWINTENSITY = 'LI', _('Low Intensity')
+        MEDINTENSITY = 'MI', _('Med Intensity')
+        HIGHINTENSITY = 'HI', _('High Intensity')
+    
+    app_type = models.CharField(
+        max_length=2,
+        choices=AppType.choices,
+        default=AppType.MEDINTENSITY,
+    )
+
+    def discretegpu_required(self):
+        return self.app_type in {
+            self.AppType.HIGHINTENSITY,
+        }
+    
+    name = models.CharField(max_length=255, unique=True, verbose_name="Name of App")
+    description = models.CharField(max_length=255, blank=True, unique=False, null=True)
+    logo = models.ImageField(upload_to='apps/%Y/%m/%d/', max_length=255, null=True, blank=True, verbose_name="Logo (1024x1024)")
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    active = models.BooleanField(default=True, db_index=True)
+
 
 '''
     make sure that the name of the quiz gets slugified and that the questions_count

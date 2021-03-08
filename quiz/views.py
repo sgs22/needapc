@@ -79,6 +79,16 @@ def results_view(request, *args, **kwargs):
     result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #weight
     print(result)
     return render(request, "quiz/results.html", {'results': result})
+
+
+    #budget
+    #apps (performance)
+    #weight 
+    #battery
+    #design
+    #storage
+    #ports?
+    
     
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 import nested_admin
-from .models import Quiz, Question, Choice, UserResponse
+from .models import Quiz, Question, Choice, UserResponse, Application
 
 
 class ChoiceInline(nested_admin.NestedTabularInline):
@@ -33,3 +33,4 @@ class ResponseInline(admin.TabularInline):
 
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(UserResponse)
+admin.site.register(Application)
