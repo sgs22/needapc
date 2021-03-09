@@ -11,7 +11,6 @@
 <form method="POST">{% csrf_token %}
     {{ form.non_field_errors }}
 <div class="fieldWrapper">
-    
     {{ form.response_1.errors }}
     {{ form.response_1.label }}
     {{ form.response_1 }}
@@ -26,12 +25,15 @@
     {{ form.response_3.label }}
     {{ form.response_3 }}
 </div>
-    <input type="submit" class="btn btn-primary" value="Submit">
+<div class="fieldWrapper">
+    {{ form.response_4.errors }}
+    {{ form.response_4.label }}
+    {{ form.response_4 }}
+</div>
+    <div class="pl-4">
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
  </form>
-
- <!-- <div class="col-sm-auto fadeInUp delay d-flex justify-content-center">
-    <a href="/quiz/laptops/results" class="btn btn-lg btnquiz">results</a>
- </div> -->
 
 
 {% endblock content %}

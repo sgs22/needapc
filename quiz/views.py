@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from products.models import ProductDetail
 
-from .models import Quiz, Question, Choice, UserResponse
+from .models import Quiz, Question, Choice, UserResponse, Application
 
 from .forms import ResponseForm
 
@@ -34,7 +34,7 @@ def quiz_detail(request, slug):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('/quiz/laptops/overview') #will be changed to results page
+            return redirect('/quiz/laptops/overview') #will be changed to results page needs dynamic url
     else:
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
@@ -77,6 +77,7 @@ def results_view(request, *args, **kwargs):
         print("fail")
     result = ProductDetail.objects.filter(price__lte=response_1)[:3] #budget
     result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #weight
+    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #display (resolution)
     print(result)
     return render(request, "quiz/results.html", {'results': result})
 

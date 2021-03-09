@@ -85,6 +85,7 @@ class Application(models.Model):
         max_length=2,
         choices=AppType.choices,
         default=AppType.MEDINTENSITY,
+        verbose_name="Resource Intensive"
     )
 
     def discretegpu_required(self):
