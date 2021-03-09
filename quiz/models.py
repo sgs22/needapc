@@ -98,6 +98,13 @@ class Application(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     active = models.BooleanField(default=True, db_index=True)
 
+    class Meta:
+        verbose_name = "Application"
+        verbose_name_plural = "Applications"
+    
+    def __str__(self):
+        return self.name
+
 
 '''
     make sure that the name of the quiz gets slugified and that the questions_count
