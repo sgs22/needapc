@@ -33,7 +33,7 @@ class ProductDetail(models.Model):
     operating_system = models.CharField(max_length=120, blank=True)
     battery_life = models.CharField(max_length=120, blank=True)
     weight = models.CharField(max_length=120, blank=True)
-    featured = models.BooleanField(blank=True)
+    featured = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True) # sets when saved
     timestamp = models.DateTimeField(auto_now_add=True) # sets when added
 
