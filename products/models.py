@@ -12,7 +12,7 @@ class ProductDetail(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='products/%Y/%m/%d/', max_length=255, null=True, blank=True) #this might change to img urls...
     url = models.CharField(max_length=120, blank=True)
-    description_overview = models.CharField(max_length=120, blank=True)
+    description = models.TextField(max_length=300, blank=True)
     brand = models.CharField(max_length=120, blank=True)
     dimensions = models.CharField(max_length=120, blank=True)
     model_number = models.CharField(max_length=120, blank=True)
@@ -24,6 +24,7 @@ class ProductDetail(models.Model):
     processor_brand = models.CharField(max_length=120, blank=True)
     processor_type = models.CharField(max_length=120, blank=True)
     processor_speed = models.CharField(max_length=120, blank=True)
+    processor_corecount = models.CharField(max_length=120, blank=True)
     ram_size = models.CharField(max_length=120, blank=True)
     memory_type = models.CharField(max_length=120, blank=True)
     harddisk_type = models.CharField(max_length=120, blank=True)
