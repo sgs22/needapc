@@ -75,20 +75,28 @@ def results_view(request, *args, **kwargs):
         print("recommend going used")
     else:
         print("fail")
-    result = ProductDetail.objects.filter(price__lte=response_1)[:3] #budget
-    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #weight
-    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:3] #display (resolution)
-    print(result)
+    result = ProductDetail.objects.filter(price__lte=response_1)[:1] #budget
+    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:1] #weight
+    result_3 = ProductDetail.objects.filter(
+                    price__lte=response_1
+                    ).filter(
+                    weight__lte=response_2
+                    ).filter(
+                    weight__lte=response_3
+                    )[:1]#display (resolution)
+    print(result, result_2, result_3)
     return render(request, "quiz/results.html", {'results': result})
 
 
-    #budget
-    #apps (performance)
-    #weight 
-    #battery
-    #design
-    #storage
-    #ports?
+    #budget single choice
+    #use case multi-choice
+    #weight single-choice
+    #apps (performance) multi-choice
+    #battery -single choice
+    #design (1-10) single-chocie
+    #storage -single choice
+    #screen size -single choice
+    #ports????? 
     
     
 
