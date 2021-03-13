@@ -6,9 +6,9 @@ from .views import  accounts, SignUpView, validate_username, validate_email, cha
 """
 app_name = 'accounts'
 urlpatterns = [
-    path('accounts/', accounts, name='accounts'),
-    path('accounts/change_password/', change_password, name='change_password'),
-    path('accounts/signup/', SignUpView.as_view(), name='signup'),
-    path('accounts/validate_username/', validate_username, name='validate_username'),
-    path('accounts/validate_email/', validate_email, name='validate_email')
+    path('account/', accounts, name='account'),
+    path('account/change_password/', change_password, name='change_password'),
+    path('account/signup/', SignUpView.as_view(), name='signup'),
+    path('account/validate_username/', validate_username, name='validate_username'),
+    path('account/validate_email/', validate_email, name='validate_email')
 ]

@@ -47,8 +47,9 @@ urlpatterns = [
     #path('', include('questionary.urls', namespace="quiz")),
     path('login/', login_view),
     path('logout/', logout_view),
+    
     path('register/', register_view),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('nested_admin/', include('nested_admin.urls')), 
 ]
 
