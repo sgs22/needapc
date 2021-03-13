@@ -45,11 +45,10 @@ urlpatterns = [
     path('', include('products.urls', namespace="products")),
     path('', include('blog.urls', namespace="blog")),
     #path('', include('questionary.urls', namespace="quiz")),
-    path('login/', login_view),
-    path('logout/', logout_view),
-    
-    path('register/', register_view),
-    path('admin/', admin.site.urls, name='admin'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('register/', register_view, name='register'),
+    path('admin/', admin.site.urls, name='adminp'),
     path('nested_admin/', include('nested_admin.urls')), 
 ]
 
@@ -57,10 +56,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# urlpatterns = [
-#     path('', home_view),
-#     path('products/', product_list_view),
-#     path('products/<int:id>/', product_get_view),
-#     path('base/', base_view),
-#     path('admin/', admin.site.urls),
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
