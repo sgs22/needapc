@@ -59,7 +59,7 @@ def register_view(request):
     if form.is_valid():
         user_obj = form.save(commit=False)
         password = form.cleaned_data.get("password")
-        user_obj.is_active = False
+        user_obj.is_active = True
         user_obj.save()
         user_obj.set_password(password)
         user_obj.save()
