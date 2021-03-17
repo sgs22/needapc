@@ -26,6 +26,8 @@ class QuizDetail(generic.DetailView):
 '''
 @login_required
 def quiz_detail(request, slug):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     template_name = 'quiz/quiz_detail.html'
     quiz = get_object_or_404(Quiz, slug=slug)
     if request.method == 'POST':

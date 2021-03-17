@@ -4,20 +4,23 @@
 {% block content %}
 
 <div class="text-center" style="padding-top: 10%;">
-        <form class="form-signin" action="{% url 'login' %}" method="post" id="login-form">
-            {% csrf_token %}
-          <h2 class="form-signin-heading">Please sign in</h2>
-          <label for="id_username" class="sr-only">Email address</label>
-          <input type="text" name="username" id="id_username" class="form-control" placeholder="User Name" required autofocus>
-          <label for="id_password" class="sr-only">Password</label>
-          <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+  <form class="form-signin" action="{% url 'login' %}" method="post" id="login-form">
+      {% csrf_token %}
+    <h2 class="form-signin-heading" style="padding-bottom: 25px;">Please Sign in</h2>
+    <label for="id_username" class="sr-only">Email address</label>
+    <input type="text" name="username" id="id_username" class="form-control" placeholder="User Name" required autofocus>
+    <label for="id_password" class="sr-only">Password</label>
+    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <label>
+      <a class="link" href="{% url 'register' %}">Or sign up!</a>
+    </label>
+  </form>
 </div>
 
 
@@ -27,9 +30,14 @@
 
 
 
-  <div class="row p-5">
-    <div class="mx-auto">
-        <h1 style="padding-bottom: 25px;">Login</h1>
-        {% include 'form.html' %}
-    </div>
+
+
+
+
+
+<div class="row p-5">
+  <div class="mx-auto">
+      <h1 style="padding-bottom: 25px;">Login</h1>
+      {% include 'form.html' %}
+  </div>
 </div>
