@@ -31,7 +31,7 @@ def product_get_view(request, id=None, *args, **kwargs):
         if review_form.is_valid():
             new_review = review_form.save(commit=False)
             new_review.product = product
-            form.user = request.user
+            new_review.user = request.user
             new_review.save()
     else:
         review_form = ReviewForm()

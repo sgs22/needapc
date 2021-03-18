@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
 
 <div class="row pt-3">
@@ -28,20 +29,21 @@
     </tr>
   </thead>
   <tbody>
-    {% for object in object_list %}
+    {% for product in product_list %}
     <tr>
-      <th scope="row" class="align-middle">{{ object.id }}</th>
-      {% if object.image %}
-      <td><img src="{{ object.image.url }}" class="img-thumbnail" width="125px"></td>
+      <th scope="row" class="align-middle">{{ product.id }}</th>
+      {% if product.image %}
+      <td><img src="{{ product.image.url }}" class="img-thumbnail" width="125px"></td>
       {% else %}
       <td></td>
       {% endif %}
-      <td class="align-middle"><a href="/products/{{ object.id }}" class="card-link">{{ object.name }}</a></td>
-      <td class="align-middle">£{{ object.price }}</td>
+      <td class="align-middle"><a href="/products/{{ product.id }}" class="card-link">{{ product.name }}</a></td>
+      <td class="align-middle">£{{ product.price }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+
 
 {% endblock %}
 

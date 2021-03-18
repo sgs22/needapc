@@ -40,7 +40,7 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user == None:
             print("Invalid User!")
-            # raise form.ValidationError(_('User is invalid'), code='invalid')
+            # raise form.ValidationError(_('User is invalid'), code='invalid') 
             # later add message
             return redirect("/login")
         # perform login
