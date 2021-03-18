@@ -5,8 +5,21 @@
 
 {% block content %}
 
-<h2 class="card-title">{{ quiz.title }}</h2>
-<h3 class="card-title">{{ quiz.description }}</h3>
+<div class="row pt-3">
+    <div class="col-lg">
+      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg">
+              <h1 class="display-4">{{ quiz.title }}</h1>
+              <p class="lead">{{ quiz.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <!-- Manually rendering forms so that later it will be easy to hide and show elements of each section in the form (wrap in div class and hide show each form response on button select)-->
 <form method="POST">{% csrf_token %}
     {{ form.non_field_errors }}
