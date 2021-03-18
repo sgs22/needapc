@@ -44,6 +44,7 @@ urlpatterns = [
     path('', include('accounts.urls', namespace="accounts")),
     path('', include('products.urls', namespace="products")),
     path('', include('blog.urls', namespace="blog")),
+    path('accounts/', include('allauth.urls')),
     #path('', include('questionary.urls', namespace="quiz")),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
