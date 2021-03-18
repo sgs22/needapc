@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 """
     Model for the products
@@ -46,4 +47,26 @@ class ProductDetail(models.Model):
     def __str__(self):
         return self.name
 
-    
+
+SCORE = (
+    (1,"Very Poor"),
+    (2,"Poor"),
+    (3,"Okay"),
+    (4,"Good"),
+    (5,"Excellent")
+)
+
+class Review(models.Model):
+    product = models.ForeignKey(ProductDetail, on_delete=models.CASCADE,related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=SCORE, default=3)
+    title = models.CharField(max_length=200, unique=True)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=True) #default true for testing
+
+    class Meta:
+        ordering = ['created_on'] 
+
+    def __str__(self):
+        return 'Review {} by {}'.format(self.title, self.user)
