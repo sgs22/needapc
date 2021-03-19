@@ -56,6 +56,9 @@ class ProductImage(models.Model):
     def __str__(self):
         return self.name
 
+    def default(self):
+        return self.images.filter(default=True).first() #default image shows as main image on product
+
 
 SCORE = (
     (1,"Very Poor"),
