@@ -21,10 +21,11 @@ from django.views.static import serve
 
 from django.conf.urls.static import static
 
+from pages.views import home_view, about_view, legal_view
+
 from products.views import (
     product_list_view,
     product_get_view,
-    home_view,
 )
 
 from featured.views import (
@@ -45,7 +46,8 @@ urlpatterns = [
     path('', include('products.urls', namespace="products")),
     path('', include('blog.urls', namespace="blog")),
     path('accounts/', include('allauth.urls')),
-    #path('', include('questionary.urls', namespace="quiz")),
+    path('about/', about_view, name='about'),
+    path('legal/', legal_view, name='legal'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),

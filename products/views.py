@@ -2,14 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from .forms import ReviewForm
 
-
 from .models import ProductDetail
-
-"""
-    Current location
-"""
-def home_view(request, id=None, *args, **kwargs):
-    return render(request, "index.html")
 
 '''
     TODO: Update product listing to use generic views?
