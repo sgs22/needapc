@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.safestring import SafeData, SafeText, mark_safe
 
 """
     Model for the products
+    TODO: Nest product images into products using django-nested-admin
 """
 class ProductDetail(models.Model):
     name = models.CharField(max_length=120, blank=False) 
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    #image = models.ImageField(upload_to='products/%Y/%m/%d/', max_length=255, null=True, blank=True) #this might change to img urls...
+    image = models.ImageField(upload_to='products/%Y/%m/%d/', max_length=255, null=True, blank=True) #this might change to img urls...
     url = models.CharField(max_length=120, blank=True)
     description = models.TextField(max_length=300, blank=True)
     brand = models.CharField(max_length=120, blank=True)
@@ -37,16 +39,22 @@ class ProductDetail(models.Model):
 
     class Meta:
         ordering = ['name'] #LIFO ordering
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
+        verbose_name = "Product Detail"
+        verbose_name_plural = "Product Details"
 
     def __str__(self):
         return self.name
 
+    # method to create fake table field (read-only)
+    # def image_tag(self):
+    #     return mark_safe('img src="{}" height="50"/>'.format(self.image.url))
+
+    #image_tag.short_description = 'Image'
+
 class ProductImage(models.Model):
     name = models.CharField(max_length=255)
     product = models.ForeignKey(ProductDetail, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='productImages/%Y/%m/%d/', max_length=255, null=True, blank=True)
+    image = models.ImageField(upload_to='products/images/%Y/%m/%d/', max_length=255, null=True, blank=True)
     default = models.BooleanField(default=False)
 
     class Meta:

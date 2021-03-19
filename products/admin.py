@@ -9,8 +9,9 @@ class ProductImageInline(admin.TabularInline):
     extra = 5
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'timestamp')
+    list_display = ('name', 'price', 'timestamp') #,'image_tag'
     list_filter = ('timestamp',)
+    #readonly_fields = ('image_tag',)
     search_fields = ['title', 'price']
     inlines = [ProductImageInline]
 
