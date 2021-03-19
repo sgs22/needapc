@@ -92,9 +92,6 @@ class Application(models.Model):
         return self.app_type in {
             self.AppType.HIGHINTENSITY,
         }
-
-    
-    
     
     name = models.CharField(max_length=255, unique=True, verbose_name="Name of App")
     description = models.CharField(max_length=255, blank=True, unique=False, null=True)

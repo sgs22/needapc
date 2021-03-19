@@ -49,7 +49,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
-    path('admin/', admin.site.urls, name='adminp'),
+    path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')), 
 ]
 

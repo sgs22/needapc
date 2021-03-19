@@ -3,15 +3,11 @@ from django.contrib.auth.models import User
 
 """
     Model for the products
-
-    Saves all admin upload images to a 'product' media file and
-    sorts them by date uploaded
-
 """
 class ProductDetail(models.Model):
     name = models.CharField(max_length=120, blank=False) 
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    image = models.ImageField(upload_to='products/%Y/%m/%d/', max_length=255, null=True, blank=True) #this might change to img urls...
+    #image = models.ImageField(upload_to='products/%Y/%m/%d/', max_length=255, null=True, blank=True) #this might change to img urls...
     url = models.CharField(max_length=120, blank=True)
     description = models.TextField(max_length=300, blank=True)
     brand = models.CharField(max_length=120, blank=True)
@@ -43,6 +39,19 @@ class ProductDetail(models.Model):
         ordering = ['name'] #LIFO ordering
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def __str__(self):
+        return self.name
+
+class ProductImage(models.Model):
+    name = models.CharField(max_length=255)
+    product = models.ForeignKey(ProductDetail, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='productImages/%Y/%m/%d/', max_length=255, null=True, blank=True)
+    default = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Product Image"
+        verbose_name_plural = "Product Images"
 
     def __str__(self):
         return self.name
