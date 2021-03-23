@@ -5,7 +5,9 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
-from .models import Quiz, Question, Choice, UserResponse
+from products.models import ProductDetail
+
+from .models import Quiz, Question, Choice, UserResponse, Application
 
 from .forms import ResponseForm
 
@@ -24,6 +26,8 @@ class QuizDetail(generic.DetailView):
 '''
 @login_required
 def quiz_detail(request, slug):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     template_name = 'quiz/quiz_detail.html'
     quiz = get_object_or_404(Quiz, slug=slug)
     if request.method == 'POST':
@@ -32,7 +36,7 @@ def quiz_detail(request, slug):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('/') #will be changed to results page
+            return redirect('/quiz/laptops/overview') #will be changed to results page needs dynamic url
     else:
         form = ResponseForm()
     return render(request, template_name, {'quiz':quiz,
@@ -40,11 +44,63 @@ def quiz_detail(request, slug):
 #get response for this user user.request
 
 
-def results_view(request, id=None, *args, **kwargs):
+# def results_view(request, *args, **kwargs):
+#     questions = Question.objects.filter(quiz__title="Laptop")
+#     responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object
+#     return render(request, "quiz/results.html", {'responses': responses,
+#                                                 'questions': questions})
+
+'''
+    Presents user with the choices they made in the quiz
+    then:     - users responses so that logic can be performed for user results (converts querysets to str/int)
+              - logic performed on each response     
+              - TODO: import products to filter them based on responses using products attributes
+                        e.g. if user responds to question saying they will commute a lot then weight of 
+                                products should be less than x kilos (<2kgs)
+
+'''
+def overview_view(request, *args, **kwargs):
     questions = Question.objects.filter(quiz__title="Laptop")
-    responses = UserResponse.objects.filter(user=request.user)
-    return render(request, "quiz/results.html", {'responses': responses,
+    responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object placed into db
+    return render(request, "quiz/overview.html", {'responses': responses,
                                                 'questions': questions})
+
+def results_view(request, *args, **kwargs):
+    response_1 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_1', flat=True).get()
+    response_2 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_2', flat=True).get()
+    response_3 = UserResponse.objects.filter(user=request.user).order_by('-id')[:1].values_list('response_3', flat=True).get()
+    print(int(response_1),response_2, response_3) #logic for filtering out products based on user budget input
+    
+    #HARD CODED REPOSNSES DIRECTLY LINKED TO QUESTION INPUT
+    #will return 3 products from db currently only filter based on price and return 3 products
+    if int(response_1) < 350:
+        print("recommend going used")
+    else:
+        print("fail")
+    result = ProductDetail.objects.filter(price__lte=response_1)[:1] #budget
+    result_2 = ProductDetail.objects.filter(weight__lte=response_2)[:1] #weight
+    result_3 = ProductDetail.objects.filter(
+                    price__lte=response_1
+                    ).filter(
+                    weight__lte=response_2
+                    ).filter(
+                    weight__lte=response_3
+                    )[:1]#display (resolution)
+    print(result, result_2, result_3)
+    return render(request, "quiz/results.html", {'results': result})
+
+
+    #budget single choice
+    #use case multi-choice
+    #weight single-choice
+    #apps (performance) multi-choice
+    #battery -single choice
+    #design (1-10) single-chocie
+    #storage -single choice
+    #screen size -single choice
+    #ports????? 
+    
+    
 
 
 

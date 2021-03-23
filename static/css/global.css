@@ -1,0 +1,177 @@
+/**
+    FONTS
+*/
+@font-face {
+    font-family: Roberto-regular;
+    src: url(../fonts/Roboto-Light-webfont.woff);
+}
+/**
+    NAVBAR
+*/
+.navbarmain {
+    background-color: rgba(0, 0, 0, 0.9)!important;
+    height: 76px;
+}
+.navbar-inner {
+    background:transparent;
+}
+
+.btnsignup {
+    border-radius: calc(0.8rem - 1px);
+    background-color: white;
+    color: black;
+    font-weight: 600;
+}
+
+.btnsignup:hover {
+    background-color:rgba(255,255,255,.75);
+}
+
+.btnlogin {
+    border-radius: calc(0.8rem - 1px);
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-weight: 600;
+
+}
+
+.btnlogin:hover {
+    background-color:rgba(255,255,255,.25);
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    font-size:17px;
+    padding-top: 0.3rem;
+}
+
+.nav-link-spacer {
+    color: white;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 22px;
+    padding-top: 0.3rem;
+    padding-right: 1rem;
+}
+
+.nav-link-spacer:hover {
+    color: white;
+}
+
+.navbar-logo {
+    font-size: 40px;
+    color: white;
+    padding-right: 0.25%;
+}
+
+.navbar-logo:hover {
+    font-size: 40px;
+    color: white;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    font-weight: 500;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(255, 255, 255);
+    padding-top: 0.6rem;
+}
+
+
+.navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
+    color: rgb(255, 255, 255)
+}
+
+/**
+    INDEX PAGE CONTENT
+*/
+
+.jumbotronindex {
+    margin-bottom: 0px;
+    padding: 12rem 2rem;
+}
+
+.btnquiz {
+    border-radius: calc(0.8rem - 1px);
+    background-color: black;
+    color: white;
+    font-weight: 600;
+}
+
+.btnquiz:hover {
+    background-color:rgb(53, 53, 53);
+    color: white;
+}
+
+.h1index {
+    font-size: 72px;
+    font-weight: 600;
+}
+
+.pindex {
+    font-size: 22px;
+}
+
+/**
+    FEATURED PAGE CONTENT
+*/
+.cardfeatured {
+    box-shadow: 0 16px 48px #E3E7EB;
+    border-radius: calc(1.5rem - 1px);
+    border: none;
+}
+
+.imgfeatured {
+    border-top-right-radius: calc(1.5rem - 1px);
+    border-top-left-radius: calc(1.5rem - 1px);
+}
+
+.overlayfeatured {
+    color: black;
+    text-align: left;
+}
+
+.btnfeatured {
+    border-radius: calc(0.8rem - 1px);
+}
+
+.jumbotronfeatured {
+    margin-bottom: 0px;
+    padding: 12rem 2rem;
+    background-color: white;
+}
+
+/**
+    FOOTER CONTENT
+*/
+.footer-logo {
+    font-size: xx-large;
+    color: black
+}
+
+
+/**
+    Layout styling
+*/
+.padding-y {
+    padding: 10rem 0;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.center {
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+/**
+    Removed bullet points as there were rendering issues with form
+*/
+/* ul {
+    list-style-type: none;
+} */

@@ -21,10 +21,11 @@ from django.views.static import serve
 
 from django.conf.urls.static import static
 
+from pages.views import home_view, about_view, legal_view
+
 from products.views import (
     product_list_view,
     product_get_view,
-    home_view,
 )
 
 from featured.views import (
@@ -44,10 +45,12 @@ urlpatterns = [
     path('', include('accounts.urls', namespace="accounts")),
     path('', include('products.urls', namespace="products")),
     path('', include('blog.urls', namespace="blog")),
-    #path('', include('questionary.urls', namespace="quiz")),
-    path('login/', login_view),
-    path('logout/', logout_view),
-    path('register/', register_view),
+    path('accounts/', include('allauth.urls')),
+    path('about/', about_view, name='about'),
+    path('legal/', legal_view, name='legal'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('register/', register_view, name='register'),
     path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')), 
 ]
@@ -56,10 +59,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# urlpatterns = [
-#     path('', home_view),
-#     path('products/', product_list_view),
-#     path('products/<int:id>/', product_get_view),
-#     path('base/', base_view),
-#     path('admin/', admin.site.urls),
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -59,6 +59,26 @@
       </div>
     </div>
   {% endfor %}
+  {% for object in products_qs %}
+    <div class="col-md-6 text-center pt-3 pb-3">
+      <div class="card cardfeatured">
+        <a class="card-block stretched-link text-decoration-none" href="/products/{{ object.id }}"></a>
+        <div class="card-img-overlay overlayfeatured">
+          <h5 class="card-title">{{ object.name }}</h5>
+          <p class="card-text">£{{ object.price }}</p>
+        </div>
+        {% if object.image %}
+        <img src="{{ object.image.url }}" class="imgfeatured card-img-top" alt="{{ object.title }}">
+        {% else %}
+        <img src="{% static '/img/placeholder.jpg' %}" class="imgfeatured card-img-top" alt="placeholder image">
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">{{ object.description_overview }}</p>
+          <!-- <a href="#" class="btn btn-secondary btnfeatured">Preview</a> -->
+        </div>
+      </div>
+    </div>
+  {% endfor %}
   </div>
 </div>
 

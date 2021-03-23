@@ -1,0 +1,26 @@
+/* #intro {
+	h1 {
+		font-size: 72px;
+		font-weight: 600;
+		@include phablet {
+			font-size: 45px;
+		}
+		@include phone {
+			font-size: 36px;
+		}
+	}
+	.video {
+		margin: -100px 0;
+		position: relative;
+		z-index: -1;
+		@include phablet {
+			margin: 0;
+			overflow: hidden;
+			img {
+				width: 170% !important;
+			    left: -35%;
+			    position: relative;
+			}
+		}
+	}
+} */

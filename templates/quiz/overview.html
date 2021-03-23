@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col">
+    <div class="text-center p-4">
+        <h1>This is what you've told us:</h1>
+    </div>
+    <table class="center text-center table table-bordered table-hover table-dark" style="width: 30%";>
+        <thead>
+          <tr>
+            <th scope="col">Your choices:</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- DEFINE CUSTOM TAG -->
+        {% for response in responses %} 
+          <tr>
+            <td>{{response.response_1}}</td>
+          </tr>
+          <tr>
+            <td>{{response.response_2 }}</td>
+          </tr>
+          <tr>
+            <td>{{response.response_3 }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <h3 class="text-center p-4">Searching for your perfect match...</h3>
+      <a class="btn btn-primary" href="/quiz/laptops/overview/results" role="button">Results</a>
+      
+  </div>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- <ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul> -->
+
+<!-- <a href="{% url 'quiz:detail' question.id %}">Vote again?</a> -->
+
+
+
+
+
+<div class="row">
+  <div class="col">
+    <div class="mx-auto">
+      <h1>This is what you've told us {{ user.first_name }}...</h1>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Question:</th>
+            <th scope="col">You Said:</th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- DEFINE CUSTOM TAG -->
+          {% for question in questions %}
+          <tr>
+            <th scope="row">{{question.question_text}}:</th>
+            <td></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <table class="table table-borderless">
+      </table>
+  </div>
+</div>
+
+
+
+
+

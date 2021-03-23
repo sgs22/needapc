@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+TODO: Restructure template for easier form readability
 
-
-<div class="row p-3">
-    <div class="mx-auto">
-        <h1>Register</h1>
-        {% include 'form.html' %}
+<div class="row">
+    <div class="mx-auto" style="width: 35%; padding-top: 5%;">
+        <h1>Sign up </h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" name="signupSubmit" class="btn btn-success"/>
+        </form>
     </div>
 </div>
 

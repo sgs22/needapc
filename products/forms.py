@@ -1,16 +1,10 @@
-# form djago import forms
+from .models import Review
+from django import forms
 
-# from .models import ProductDetail
-
-# class ProductDetailForm(forms.Modelform):
-#     product = forms.CharField(label="",
-#         widget=forms.CharInput(
-#             attrs={
-#                 "placeholder": "Your email",
-#                 "class": "form-control"
-#             }
-#         )
-#     )
-#     class Meta:
-#         model = ProductDetail
-#         fields = ['name']      
+"""
+    adds the fields to the form for comment on blog post
+"""
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('rating', 'title', 'body')

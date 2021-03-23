@@ -5,82 +5,34 @@
 
 {% block content %}
 
-<div class="row">
-  <div class="col">
-    <div class="mx-auto">
-        <h1>This is what you've told us:</h1>
-    </div>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Your choices:</th>
-          </tr>
-        </thead>
-        <tbody>
-        <!-- DEFINE CUSTOM TAG -->
-        {% for response in responses %} 
-          <tr>
-            <td>{{response.response_1}}</td>
-          </tr>
-          <tr>
-            <td>{{response.response_2 }}</td>
-          </tr>
-          <tr>
-            <td>{{response.response_3 }}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      <table class="table table-borderless">
-      </table>
-  </div>
-</div>
+<h3 class="text-center p-4">Results:</h3>
+
+<table class="center text-center table table-bordered table-hover table-dark" style="width: 80%">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for result in results %} 
+      <tr>
+        <th scope="row" class="align-middle"><a href="/products/{{ result.id }}" class="card-link">{{ result.name }}</a></th>
+        {% if result.image %}
+        <td class="align-middle"><img src="{{ result.image.url }}" class="img-thumbnail" width="125px"></td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td class="align-middle">£{{ result.price }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 
 
 
 {% endblock content %}
-
-<!-- <ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul> -->
-
-<!-- <a href="{% url 'quiz:detail' question.id %}">Vote again?</a> -->
-
-
-
-
-
-<div class="row">
-  <div class="col">
-    <div class="mx-auto">
-      <h1>This is what you've told us {{ user.first_name }}...</h1>
-    </div>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Question:</th>
-            <th scope="col">You Said:</th>
-          </tr>
-        </thead>
-        <tbody>
-        <!-- DEFINE CUSTOM TAG -->
-          {% for question in questions %}
-          <tr>
-            <th scope="row">{{question.question_text}}:</th>
-            <td></td>
-          </tr>
-          {% endfor %}
-
-        </tbody>
-      </table>
-      <table class="table table-borderless">
-      </table>
-  </div>
-</div>
-
-
 
 
 

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row p-3">
+<div class="row" style="padding: 7%;">
     <div class="mx-auto">
-        <h1>{{ object.name }}</h1>
+        <h1>{{ product.name }}</h1>
     </div>
 </div>
 
@@ -12,8 +13,8 @@
     <div class="row">
       <div class="col">
         <div class="mx-auto">
-            {% if object.image %}
-            <img src="{{ object.image.url }}" class="img-fluid rounded"alt="{{ object.name }}">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="img-fluid rounded p-4" alt="{{ product.name }}">
             {% endif %}
         </div>
       </div>
@@ -28,23 +29,23 @@
             <tbody>
               <tr>
                 <th scope="row">Name: </th>
-                <td>{{ object.name }}</td>
+                <td>{{ product.name }}</td>
               </tr>
               <tr>
                 <th scope="row">Brand</th>
-                <td>{{ object.brand }}</td>
+                <td>{{ product.brand }}</td>
               </tr>
               <tr>
                 <th scope="row">Model</th>
-                <td>{{ object.modelnumber }}</td>
+                <td>{{ product.modelnumber }}</td>
               </tr>
               <tr>
                 <th scope="row">Size</th>
-                <td>{{ object.size }}</td>
+                <td>{{ product.size }}</td>
               </tr>
               <tr>
                 <th scope="row">Price</th>
-                <td>£{{ object.price }}</td>
+                <td>£{{ product.price }}</td>
               </tr>
             </tbody>
           </table>
@@ -52,12 +53,49 @@
             <thead>
               <tr>
                 <th scope="col">Purchase:</th>
-                <th><button type="button" class="btn btn-primary btn-warning btn-sm">Buy from Amazon</button></th>
+                <th><a type="button" href="{{ product.url }}" target="_blank" class="btn btn-primary btn-warning btn-sm">Buy from Amazon</a></th>
               </tr>
             </thead>
             </tbody>
           </table>
           
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- reviews -->
+        <h2>{{ reviews.count }} Reviews</h2>
+    
+        {% for review in reviews %}
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ review.title }} | {% include 'products/rating.html' %} 
+            <span class=" text-muted font-weight-normal">
+              {{ review.created_on }} 
+            </span>
+          </p>
+          {{ review.body | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_review %}
+        <div class="alert alert-success" role="alert">
+          Your review is awaiting approval
+        </div>
+        {% elif user.is_authenticated%}
+        <h3>Leave a review</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {% csrf_token %}
+          {{ review_form|crispy }}
+          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+        </form>
+        {% else %}
+        <h2>Login to leave a review!</h2>
+        <a type="button" href="{% url 'login' %}" class="btn btn-primary">Login</a></th>
+        {% endif %}
       </div>
     </div>
 </div>
