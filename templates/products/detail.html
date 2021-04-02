@@ -52,8 +52,8 @@
           <table class="table table-borderless">
             <thead>
               <tr>
-                <th scope="col">Purchase:</th>
-                <th><a type="button" href="{{ product.url }}" target="_blank" class="btn btn-primary btn-warning btn-sm">Buy from Amazon</a></th>
+                <th scope="col"></th>
+                <th><a type="button" href="{{ product.url }}" target="_blank" class="btn btn-yellow">Buy from Amazon</a></th>
               </tr>
             </thead>
             </tbody>
@@ -93,8 +93,8 @@
           <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
         </form>
         {% else %}
-        <h2>Login to leave a review!</h2>
-        <a type="button" href="{% url 'login' %}" class="btn btn-primary">Login</a></th>
+        <h2 class="pb-2">You need to be logged in to leave a review!</h2>
+        <a type="button" href="{% url 'login' %}" class="btn btn-default">Login</a></th>
         {% endif %}
       </div>
     </div>

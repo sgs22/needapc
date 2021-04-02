@@ -1,4 +1,7 @@
 /**
+    TODO: restures global css into cohesive structure no pages as most styles inherit form defaults!
+*/
+/**
     FONTS
 */
 @font-face {
@@ -17,7 +20,7 @@
 }
 
 .btnsignup {
-    border-radius: calc(0.8rem - 1px);
+    border-radius: calc(1.5rem - 1px);
     background-color: white;
     color: black;
     font-weight: 600;
@@ -28,7 +31,7 @@
 }
 
 .btnlogin {
-    border-radius: calc(0.8rem - 1px);
+    border-radius: calc(1.5rem - 1px);
     background-color: rgba(0, 0, 0, 0);
     color: white;
     font-weight: 600;
@@ -93,8 +96,32 @@
     padding: 12rem 2rem;
 }
 
+.btn-default {
+    border-radius: calc(1.5rem - 1px);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-weight: 600;
+}
+
+.btn-default:hover {
+    background-color:rgb(53, 53, 53);
+    color: white;
+}
+
+.btn-yellow {
+    border-radius: calc(1.5rem - 1px);
+    background-color: rgba(255, 208, 0, 0.9);
+    color: black;
+    font-weight: 600;
+}
+
+.btn-yellow:hover {
+    background-color:rgba(253, 226, 106, 0.9);
+    color: black;
+}
+
 .btnquiz {
-    border-radius: calc(0.8rem - 1px);
+    border-radius: calc(1.5rem - 1px);
     background-color: black;
     color: white;
     font-weight: 600;
@@ -117,6 +144,12 @@
 /**
     FEATURED PAGE CONTENT
 */
+.card-curved {
+    box-shadow: 0 16px 48px #E3E7EB;
+    border-radius: calc(1.5rem - 1px);
+    border: none;
+}
+
 .cardfeatured {
     box-shadow: 0 16px 48px #E3E7EB;
     border-radius: calc(1.5rem - 1px);

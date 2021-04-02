@@ -50,10 +50,10 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8 mt-3 left" style="padding-top: 7px;">
           {% for quiz in quiz_list %}
-          <div class="card mb-4">
+          <div class="card mb-4 card-curved">
               <div class="card-body">
-                  <h2 class="card-title">{{ quiz.title }}</h2>
-                  <a href="{{ quiz.slug }}/" class="btn btn-primary">Start</a>
+                  <h2 class="card-title pb-4">{{ quiz.title }}</h2>
+                  <a href="{{ quiz.slug }}/" class="btn btn-default">Start</a>
               </div>
           </div>
           {% endfor %}
