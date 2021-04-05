@@ -25,16 +25,16 @@ class ResponseForm(ModelForm):
         fields = ('response_1','response_2','response_3','response_4',)
         exclude = ('user',)
 
-    response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),
+    response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),         #response for budget
                                         queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
                                         widget=forms.RadioSelect(attrs={}))
-    response_2 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"),
+    response_2 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"), #response for workflow
                                         queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
                                         widget=forms.CheckboxSelectMultiple()) 
-    response_3 = forms.ModelChoiceField(label=Question.objects.get(question_number=3,quiz__title="Laptop"),
+    response_3 = forms.ModelChoiceField(label=Question.objects.get(question_number=3,quiz__title="Laptop"),         #response for 
                                         queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop"), 
                                         widget=forms.RadioSelect(attrs={}))
-    response_4 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=4,quiz__title="Laptop"),
+    response_4 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=4,quiz__title="Laptop"), #response for app selection
                                         queryset=Application.objects.filter(active=True),
                                         widget=forms.CheckboxSelectMultiple()) 
                                         
