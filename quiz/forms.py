@@ -27,12 +27,12 @@ class ResponseForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ResponseForm, self).__init__(*args, **kwargs)
-        if Question.objects.filter(type=1):
-            self.fields['response_1'] = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"), #response for workflow
-                                        queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
-                                        widget=forms.CheckboxSelectMultiple()) 
-
-        
+        for question in Question.objects.all():
+            if question.type==1:
+                self.fields['response_1'] = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),         #response for budget
+                                        queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
+                                        widget=forms.RadioSelect())
+            
 
     response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),         #response for budget
                                         queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
@@ -41,7 +41,7 @@ class ResponseForm(ModelForm):
                                         queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
                                         widget=forms.CheckboxSelectMultiple()) 
     response_3 = forms.ModelChoiceField(label=Question.objects.get(question_number=3,quiz__title="Laptop"),         #response for 
-                                        queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop"), 
+                                        queryset=Choice.objects.select_related('question'), 
                                         widget=forms.RadioSelect())
     response_4 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=4,quiz__title="Laptop"), #response for app selection
                                         queryset=Application.objects.filter(active=True),

@@ -57,7 +57,7 @@ class Question(models.Model):
 '''
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions', related_query_name='question')
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz') #needed for fitlering forms 
 
     class Meta:
@@ -69,7 +69,6 @@ class Choice(models.Model):
 
 class UserResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user',null=True)
-    #question = models.ForeignKey(Question, on_delete=models.CASCADE) quiz might need to be here...
     response_1 = models.CharField(max_length=200, null=True)
     response_2 = models.CharField(max_length=200, null=True)
     response_3 = models.CharField(max_length=200, null=True)
