@@ -22,23 +22,40 @@ from .models import Quiz, Question, Choice, UserResponse, Application
 class ResponseForm(ModelForm):
     class Meta:
         model = UserResponse
-        fields = ('response_1','response_2','response_3','response_4',)
+        fields = ('__all__')
         exclude = ('user',)
+
+    def __init__(self, *args, **kwargs):
+        super(ResponseForm, self).__init__(*args, **kwargs)
+        if Question.objects.filter(type=1):
+            self.fields['response_1'] = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"), #response for workflow
+                                        queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
+                                        widget=forms.CheckboxSelectMultiple()) 
+
+        
 
     response_1 = forms.ModelChoiceField(label=Question.objects.get(question_number=1,quiz__title="Laptop"),         #response for budget
                                         queryset=Choice.objects.filter(question__question_number=1,quiz__title="Laptop"),
-                                        widget=forms.RadioSelect(attrs={}))
+                                        widget=forms.RadioSelect())
     response_2 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=2,quiz__title="Laptop"), #response for workflow
                                         queryset=Choice.objects.filter(question__question_number=2,quiz__title="Laptop"),
                                         widget=forms.CheckboxSelectMultiple()) 
     response_3 = forms.ModelChoiceField(label=Question.objects.get(question_number=3,quiz__title="Laptop"),         #response for 
                                         queryset=Choice.objects.filter(question__question_number=3,quiz__title="Laptop"), 
-                                        widget=forms.RadioSelect(attrs={}))
+                                        widget=forms.RadioSelect())
     response_4 = forms.ModelMultipleChoiceField(label=Question.objects.get(question_number=4,quiz__title="Laptop"), #response for app selection
                                         queryset=Application.objects.filter(active=True),
                                         widget=forms.CheckboxSelectMultiple()) 
-                                        
 
+                                        
+    # gets form widget based on type of question, 1 = one answer, 2 = Multiple, 3 = Text answer
+    def getQuestionType(*args, **kwargs):
+        if Question.objects.get(type=1):
+            questionType = RadioSelect()
+        elif Question.objects.get(type=2):
+            questionType = CheckboxSelectMultiple()
+        else:
+            questionType = TextInput()
 
 
 

@@ -87,11 +87,6 @@ class Application(models.Model):
         default=AppType.MEDINTENSITY,
         verbose_name="Resource Intensive"
     )
-
-    def discretegpu_required(self):
-        return self.app_type in {
-            self.AppType.HIGHINTENSITY,
-        }
     
     name = models.CharField(max_length=255, unique=True, verbose_name="Name of App")
     description = models.CharField(max_length=255, blank=True, unique=False, null=True)
@@ -105,6 +100,11 @@ class Application(models.Model):
     
     def __str__(self):
         return self.name
+
+    def discretegpu_required(self):
+        return self.app_type in {
+            self.AppType.HIGHINTENSITY,
+        }
 
 
 '''
