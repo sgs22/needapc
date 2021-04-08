@@ -145,13 +145,13 @@
     FEATURED PAGE CONTENT
 */
 .card-curved {
-    box-shadow: 0 16px 48px #E3E7EB;
+    box-shadow: 0 16px 48px #bec1c5 !important;
     border-radius: calc(1.5rem - 1px);
     border: none;
 }
 
 .cardfeatured {
-    box-shadow: 0 16px 48px #E3E7EB;
+    box-shadow: 0 16px 48px #bec1c5;
     border-radius: calc(1.5rem - 1px);
     border: none;
 }
