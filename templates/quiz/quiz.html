@@ -47,27 +47,30 @@
 
 <div class="container">
   <div class="row">
-      <!-- Blog Entries Column -->
+      <!-- Column -->
       <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
           {% for quiz in quiz_list %}
           <div class="card mb-4 card-curved">
               <div class="card-body">
                   <h2 class="card-title pb-4 text-center">{{ quiz.title }}</h2>
                   <div class="row justify-content-center">
-                    <a href="{{ quiz.slug }}/" class="btn btn-default ">Start</a>
+                    <a href="{{ quiz.slug }}/" class="btn btn-default ">Get Started</a>
                   </div>
               </div>
           </div>
-          <div class="card mb-4 card-curved">
-            <div class="card-body">
-                <h2 class="card-title pb-4 text-center">Desktop</h2>
-                <div class="row justify-content-center">
-                  <a href="{{ quiz.slug }}/" class="btn btn-default ">Coming soon</a>
-                </div>
-            </div>
-          </div>
           {% endfor %}
       </div>
+      <!-- Column -->
+      <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
+        <div class="card mb-4 card-curved">
+          <div class="card-body">
+              <h2 class="card-title pb-4 text-center">Desktop</h2>
+              <div class="row justify-content-center">
+                <a href="#" class="btn btn-default disabled">Coming soon</a>
+              </div>
+          </div>
+        </div>
+    </div>
   </div>
 </div>
 
