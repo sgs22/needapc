@@ -19,6 +19,26 @@
       </div>
     </div>
   </section>
+  {% for post in index_list %}
+  <div class="container-fluid">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          {% if post.image %}
+          <img src="{{ post.image.url }}" class="d-block w-100" alt="{{ post.header }}">
+          {% else %}
+          <img src="" class="d-block w-100" alt="{{ post.header }}">
+          {% endif %}
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ post.header }}</h5>
+            <p>{{ post.description }}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock content %}
