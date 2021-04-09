@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'blog',
     'featured',
     'quiz',
+    'pages',
     'accounts',
     'nested_admin', 
-    'questionary',
 
     'allauth',
     'allauth.account',
