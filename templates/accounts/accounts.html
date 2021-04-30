@@ -5,23 +5,20 @@
 <div class="container">
   <div class="row pt-3">
     <div class="col-lg">
-      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 50px;">
         <div class="container">
           <div class="row">
             <div class="col-lg">
-              <h1 class="display-4">Dashboard</h1>
+              <h1 class="display-4">{{ user.first_name }}'s Dashboard</h1>
               <p class="lead"></p>
             </div>
           </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
   <div class="row">
     <div class="col">
-      <div class="mx-auto">
-          <h1>Welcome, {{ user.username }}!</h1>
-      </div>
       <table class="table table-bordered">
           <thead>
             <tr>
@@ -30,6 +27,10 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <th scope="row">Username: </th>
+              <td>{{ user.username }}</td>
+            </tr>
             <tr>
               <th scope="row">Name: </th>
               <td>{{ user.first_name }} {{ user.last_name }}</td>
@@ -42,6 +43,27 @@
               <th scope="row">Change Password:</th>
               <td><a href="/accounts/change_password/" class="btn btn-warning">Update</a></td>
             </tr>
+          </tbody>
+        </table>
+        <table class="table table-borderless">
+        </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Results</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">"Date/time of result" </th>
+              <td>"link to product" / "why this product was a good fit"</td>
+            </tr>
+            
           </tbody>
         </table>
         <table class="table table-borderless">

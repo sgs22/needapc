@@ -82,10 +82,11 @@ class SignUpView(CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy('accounts')
 
-
+# TODO: Not user responses but list of recent or last result the user had.
 @login_required
 def accounts(request):
-    return render(request, 'accounts/accounts.html')
+    responses = UserResponse.objects.filter(user=request.user).order_by('-id')[:1] #last object placed into db
+    return render(request, 'accounts/accounts.html', {'responses': responses})
 
 
 @login_required
@@ -104,13 +105,6 @@ def change_password(request):
     return render(request, 'accounts/change_password.html', {
         'form': form
     })
-
-
-
-
-
-
-
 
 
     def form_valid(self, form):
