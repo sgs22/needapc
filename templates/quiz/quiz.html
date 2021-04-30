@@ -48,31 +48,40 @@
       <!-- Column -->
       <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
           {% for quiz in quiz_list %}
-          <div class="card mb-4 card-curved">
-              <div class="card-body">
-                  <h2 class="card-title pb-4 text-center">{{ quiz.title }}</h2>
-                  <div class="row justify-content-center">
-                    <a href="{{ quiz.slug }}/" class="btn btn-default ">Get Started</a>
-                  </div>
+          <div class="col-md-12 text-center pt-3 pb-3">
+            <div class="card card-curved">
+              <a class="card-block stretched-link text-decoration-none" href="{{ quiz.slug }}/"></a>
+              <div class="card-img-overlay overlayfeatured">
+                <h2 class="card-title text-center" style="padding-top: 62%; font-size: 28px;" >laptop.</h2>
               </div>
+              <img src="{% static '/img/surfacegoquiz.jpg' %}" class="imgcurved card-img-top" alt="desktopimg">
+            </div>
           </div>
           {% endfor %}
       </div>
-      <!-- Column -->
       <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
-        <div class="card mb-4 card-curved">
-          <div class="card-body">
-              <h2 class="card-title pb-4 text-center">Desktop</h2>
-              <div class="row justify-content-center">
-                <a href="#" class="btn btn-default disabled">Coming soon</a>
-              </div>
+        <div class="col-md-12 text-center pt-3 pb-3">
+          <div class="card card-curved">
+            <a class="card-block stretched-link text-decoration-none" href="#"></a>
+            <div class="card-img-overlay overlayfeatured">
+              <h2 class="card-title text-center" style="padding-top: 60%; font-size: 22px;">desktop.<br> (coming soon)<br/></h2>
+            </div>
+            <img src="{% static '/img/db1s-front-angle.jpg' %}" class="imgcurved card-img-top" alt="desktopimg">
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
 
 
-
 {% endblock content %}
 
+<div class="card mb-4 card-curved">
+  <div class="card-body">
+      <h2 class="card-title pb-4 text-center">{{ quiz.title }}</h2>
+      <div class="row justify-content-center">
+        <a href="{{ quiz.slug }}/" class="btn btn-default ">Get Started</a>
+      </div>
+  </div>
+</div>
