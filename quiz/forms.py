@@ -14,6 +14,8 @@ from .models import Quiz, Question, Choice, UserResponse, Application
     https://www.agiliq.com/blog/2014/04/django-backward-relationship-lookup/
 
     TODO: ADD additional forms for other quizzes i.e. one for Laptop one for Desktop.
+    
+    #TODO: ADD IF STATEMENT VAILDATION FOR IF QUIZ IS FOUND THEN DISPLAY ELSE SHOW ERROR SO THAT THE WEB APP RUNS!
 
 '''
 # question_instance = Question.objects.filter(question_number=1)
