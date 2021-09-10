@@ -31,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -163,6 +162,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     #'social_core.backends.google.GoogleOAuth2',
 ]
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
