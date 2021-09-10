@@ -50,9 +50,6 @@ class Question(models.Model):
 
 
 '''
-    Django polls tutorial could be used here to record the number 
-    of people selecting each choice for internal data insight?
-
     Could be updated to include linking to a user so that it can be saved
 '''
 class Choice(models.Model):
