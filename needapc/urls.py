@@ -39,6 +39,7 @@ from accounts.views import (
 urlpatterns = [
     path('', home_view),
     path('', include('quiz.urls', namespace="quiz")),
+    path('', include('quizApp.urls', namespace="quizApp")),
     path('', include('featured.urls', namespace="featured")),
     path('', include('accounts.urls', namespace="accounts")),
     path('', include('products.urls', namespace="products")),

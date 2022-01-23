@@ -1,10 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Name")
 
     class Meta:
-        ordering = ['created']
         verbose_name = "Quiz"
         verbose_name_plural = "Quizzes"
 
@@ -17,7 +17,6 @@ class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['question_number']  
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
@@ -26,7 +25,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions', related_query_name='question')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Choice"
@@ -36,8 +35,8 @@ class Choice(models.Model):
         return self.choice_text
 
 class QuizAnswer(models.Model):
-    answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE, related_name='choices', related_query_name='choice')
-    user = models.ForeignKey(User)
+    answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Answer"
