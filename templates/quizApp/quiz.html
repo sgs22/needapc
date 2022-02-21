@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Form for quiz template to take inspo from https://jthemes.net/themes/html/wizard-form/v1/-->
+{% block content %}
+<div class="col-lg">
+  <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg">
+          <h1 class="display-4">QuizApp</h1>
+          <p class="lead">Select what type of computer you're looking for.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <!-- Column -->
+      <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
+          {% for quiz in quiz_list %}
+          <p>{{ quiz.name }}</p>
+          <div class="col-md-12 text-center pt-3 pb-3">
+            <div class="card card-curved">
+              <a class="card-block stretched-link text-decoration-none" href="{{ quiz.slug }}/"></a>
+              <div class="card-img-overlay overlayfeatured">
+                <h2 class="card-title text-center" style="padding-top: 62%; font-size: 28px;" >laptop.</h2>
+              </div>
+              <img src="{% static '/img/surfacegoquiz.jpg' %}" class="imgcurved card-img-top" alt="desktopimg">
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+

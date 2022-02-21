@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="row pt-3 mr-0">
+    <div class="col-lg">
+      <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg">
+              <h1 class="display-4">{{ quiz.name }}</h1>
+              <p class="lead">{{ quiz.slug }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+

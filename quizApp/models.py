@@ -1,8 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.dispatch import receiver
+from django.template.defaultfilters import slugify
+from django.db.models.signals import post_save, pre_save
+
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Name")
+    slug = models.SlugField(max_length=200, unique=True,default="test")
 
     class Meta:
         verbose_name = "Quiz"
@@ -41,3 +46,11 @@ class QuizAnswer(models.Model):
     class Meta:
         verbose_name = "Answer"
         verbose_name_plural = "Answers"
+
+'''
+    make sure that the name of the quiz gets slugified and that the questions_count
+     in the quiz is always equal to the number of questions related to that quiz
+'''
+@receiver(pre_save, sender=Quiz)
+def slugify_name(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.name)
