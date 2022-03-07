@@ -20,18 +20,12 @@
   <div class="row">
       <!-- Column -->
       <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
+        <ul>
           {% for quiz in quiz_list %}
-          <p>{{ quiz.name }}</p>
-          <div class="col-md-12 text-center pt-3 pb-3">
-            <div class="card card-curved">
-              <a class="card-block stretched-link text-decoration-none" href="{{ quiz.slug }}/"></a>
-              <div class="card-img-overlay overlayfeatured">
-                <h2 class="card-title text-center" style="padding-top: 62%; font-size: 28px;" >laptop.</h2>
-              </div>
-              <img src="{% static '/img/surfacegoquiz.jpg' %}" class="imgcurved card-img-top" alt="desktopimg">
-            </div>
-          </div>
+          <a href="{{quiz.get_absolute_url }}">{{ quiz.name }}</a>
           {% endfor %}
+        </ul>
+        </div>
       </div>
     </div>
   </div>

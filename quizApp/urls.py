@@ -6,6 +6,6 @@ from . import views
 """
 app_name = 'quizApp'
 urlpatterns = [
-    path('quizapp/', views.QuizList.as_view(), name='quiz_list'),
-    path('quizApp/<slug:slug>/', views.QuizDetail.as_view())
+    path('quizApp/<slug:slug>/', views.QuizDetail.as_view(), name='quiz_detail'),
+    path('quizapp/', views.QuizList.as_view(), name='quiz_list')
 ]

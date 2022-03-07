@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_save
+from django.urls import reverse
 
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Name")
@@ -16,10 +17,13 @@ class Quiz(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('quizApp:quiz_detail', kwargs={'slug': self.slug})
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=255, unique=True)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name = "questionsOfQuiz")
 
     class Meta:
         verbose_name = "Question"
