@@ -20,11 +20,15 @@ class QuizDetail(generic.DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         print(context)
+        print(context.get('object').slug)
         print(context.get('object'))
         # print(Question.objects.first())
-        quiz = context.get("quiz")
+        quiz_id = context.get('object').id
         # Add in a QuerySet of all the questions
-        context['question_list'] = Question.objects.filter(quiz__exact=1) #get questions where quiz = this.quiz
+        context['question_list'] = Question.objects.select_related().filter(quiz = quiz_id)
+        #.select_related().filter(quiz = quiz_id)
+        context['choice_list'] = context['question_list'].select_related()
+        print(Choice.objects.select_related())
         return context
 
 # def get_answer(request):
