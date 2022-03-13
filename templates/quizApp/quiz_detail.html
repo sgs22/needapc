@@ -11,18 +11,19 @@
         <div class="container">
           <div class="row">
             <div class="col-lg">
-              <h1 class="display-4">{{ quiz.name }}</h1>
-              <p class="lead">{{ quiz.slug }}</p>
+              <h1 class="display-4">Quiz Name: {{ quiz.name }}</h1>
+              <p class="lead">Quiz Slug: {{ quiz.slug }}</p>
             </div>
 
             {% for question in question_list %}
-            <p class="lead">{{ question.question_text }}</p>
-            <p class="lead">{{ question.quiz }}</p>
-            <p class="lead">{{ question.id }}</p>
-              {% for choice in choice_list %}
-              <p class="lead">{{ question.question_text }}</p>
-              <p class="lead">{{ question.quiz }}</p>
-              {% endfor %}
+            <div>
+              <p class="lead">Question ID: {{ question.id }}</p> 
+              <p class="lead">Quiz Name: {{ question.quiz }}</p>
+              <p class="lead">Question: {{ question.question_text }}</p>
+            {% for choice in choice_list %}
+              <p class="lead">Choice: {{ choice.choice_text }}</p>
+            {% endfor %}
+            </div>
             {% endfor %}
           </div>
         </div>
