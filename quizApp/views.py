@@ -27,8 +27,16 @@ class QuizDetail(generic.DetailView):
         # Add in a QuerySet of all the questions
         context['question_list'] = Question.objects.select_related().filter(quiz = quiz_id)
         #.select_related().filter(quiz = quiz_id)
-        context['choice_list'] = context['question_list'].select_related()
-        print(Choice.objects.select_related())
+        # question_id = context.get('question_list').id
+        # question_id = []
+        # for x in (context['question_list']):
+        #    print(x.id)
+        #    question_id.append(x.id)
+        print(context['question_list'].values)
+        # question = context['question_list'].values.id
+        context['choice_list'] = Choice.objects.select_related()
+        #print(Choice.objects.select_related())
+        #print(context)
         return context
 
 # def get_answer(request):
