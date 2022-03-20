@@ -32,12 +32,15 @@ class QuizDetail(generic.DetailView):
         # for x in (context['question_list']):
         #    print(x.id)
         #    question_id.append(x.id)
-        print(context['question_list'].values)
+        question_id = context.get('object').id
+        print(context['question_list'].id)
         # question = context['question_list'].values.id
         context['choice_list'] = Choice.objects.select_related()
-        #print(Choice.objects.select_related())
-        #print(context)
+
         return context
+
+    def get_children(self, **kwargs):
+        
 
 # def get_answer(request):
 #     if request.method == 'POST':
