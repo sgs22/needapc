@@ -20,10 +20,9 @@
               <p class="lead">Question ID: {{ question.id }}</p> 
               <p class="lead">Quiz Name: {{ question.quiz }}</p>
               <p class="lead">Question: {{ question.question_text }}</p>
-              {% for choice in choice_list %}
-                <p class="lead">Choice: {{ choice.choice_text }}</p>
+              {% for choice in choice_list_reverselookup %}
+                <p class="lead">Test: {{ choice.choice_text }}</p>
               {% endfor %}
-
 
             </div>
             {% endfor %}
