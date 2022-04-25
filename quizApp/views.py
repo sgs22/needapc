@@ -26,20 +26,22 @@ class QuizDetail(generic.DetailView):
         quiz_id = context.get('object').id
         # Add in a QuerySet of all the questions
         context['question_list'] = Question.objects.select_related().filter(quiz = quiz_id)
-        #.select_related().filter(quiz = quiz_id)
-        # question_id = context.get('question_list').id
-        # question_id = []
-        # for x in (context['question_list']):
-        #    print(x.id)
-        #    question_id.append(x.id)
         question_id = context.get('object').id
-        print(context['question_list'].id)
+        question_choices = {}
+        for question in context['question_list']:
+            question_object = Question.objects.get(id=question.id)
+            question_choices[question_id] = question_object.choice_set.all()
+        print(question_choices)
+        #print(context['question_list'].id)
         # question = context['question_list'].values.id
         context['choice_list'] = Choice.objects.select_related()
 
+
+        # reverse lookup - question.choice_set.all() gets all related choices to that question
+        context['choice_list_reverselookup'] = question_choices.values()
         return context
 
-    def get_children(self, **kwargs):
+    #def get_children(self, **kwargs):
         
 
 # def get_answer(request):
