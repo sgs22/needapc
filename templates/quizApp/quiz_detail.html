@@ -4,34 +4,41 @@
 
 
 {% block content %}
-<p>hello</p>
-<div class="row pt-3 mr-0">
+<div class="row pt-3 mr-0" xmlns="http://www.w3.org/1999/html">
     <div class="col-lg">
       <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
         <div class="container">
           <div class="row">
-            <div class="col-lg">
+            <div class="col-lg pb-3">
               <h1 class="display-4">Quiz Name: {{ quiz.name }}</h1>
               <p class="lead">Quiz Slug: {{ quiz.slug }}</p>
             </div>
-
-            {% for question in question_list %}
-            <div style="padding-right:40px">
-              <p class="lead">Question ID: {{ question.id }}</p> 
-              <p class="lead">Quiz Name: {{ question.quiz }}</p>
-              <p class="lead">Question: {{ question.question_text }}</p>
-              {% for choice in choice_list_reverselookup %}
-                <p class="lead">Test: {{ choice.choice_text }}</p>
-              {% endfor %}
-
-            </div>
-            {% endfor %}
           </div>
+        <div class="row">
+            <div class="col-lg">
+                {% for question in question_list %}
+                <div style="padding-bottom: 50px">
+                    <p class="lead"><b>Question ID:</b> {{ question.id }}</p>
+                  <p class="lead"><b>Quiz Name:</b> {{ question.quiz }}</p>
+                    <p class="lead"><b>Question:</b> {{ question.question_text }}</p>
+                {% for choice in choice_list %}
+                    {% if question.id == choice.question_id %}
+                        <ul>
+                            <li class="lead"><b>Choice Option:</b> {{ choice.choice_text }}</li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         </div>
       </div>
     </div>
 </div>
+<div class="row">
 
+</div>
 
 {% endblock content %}
 
