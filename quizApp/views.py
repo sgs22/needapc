@@ -12,10 +12,14 @@ class QuizList(generic.ListView):
     template_name = 'quizApp/quiz.html'
     context_object_name = 'quiz_list'
 
+
 class QuizDetail(generic.DetailView):
     model = Quiz
     template_name = 'quizApp/quiz_detail.html'
-    
+
+    def get_form(self):
+        form = AnswerForm()
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
@@ -42,8 +46,7 @@ class QuizDetail(generic.DetailView):
 
         return context
 
-    #def get_children(self, **kwargs):
-        
+    # def get_children(self, **kwargs):
 
 # def get_answer(request):
 #     if request.method == 'POST':

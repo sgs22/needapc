@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  accounts, SignUpView, validate_username, validate_email, change_password
+from .views import accounts, SignUpView, validate_username, validate_email, change_password
 
 """
     Url paths extended from from django.urls
