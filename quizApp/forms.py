@@ -1,26 +1,20 @@
 from django import forms
-from .models import QuizAnswer
+from django.contrib.auth.models import User
+from .models import QuizAnswer, Choice
 
 
 class AnswerForm(forms.ModelForm):
+
     class Meta:
         model = QuizAnswer
         fields = '__all__'
 
-    # you have your questions written out on the page
-    #################################################
-    # for each question in question model where quix = x {
-    #   display question.name = show
-    #       
-    #       for each choice in that question {
-    #           display choice.name = show
-    #   }
+    def __init__(self, *args, **kwargs):
+        super(AnswerForm, self).__init__(*args, **kwargs)
+        self.fields['answer_choice'].queryset = Choice.objects.filter(id=1)
+        #self.fields['user'].queryset = User.objects.filter(user=requ)
 
-    # }
 
-    # now you can display all choices for each question on a page
-    # 
-    # need a way to take choice use it as an input for choice_answer
-    # then store that choice in quizAnswer model for each question
 
-    # finally take all quizAnswers then process them
+    # init method to filter out choices for each modelform for each question request.user
+

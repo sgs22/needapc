@@ -17,8 +17,7 @@ class QuizDetail(generic.DetailView):
     model = Quiz
     template_name = 'quizApp/quiz_detail.html'
 
-    def get_form(self):
-        form = AnswerForm()
+
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -32,8 +31,8 @@ class QuizDetail(generic.DetailView):
         context['question_list'] = Question.objects.select_related().filter(quiz=quiz_id)
         context['choice_list'] = Choice.objects.all()
         question_id = context.get('object').id
-        for question in context['question_list']:
-            print(question.question_choices.all().values())
+        #for question in context['question_list']:
+        #    print(question.question_choices.all().values())
             # context['question_choices'] = question.choice_set.all()
 
         # print(context['question_list'].id)
@@ -43,10 +42,9 @@ class QuizDetail(generic.DetailView):
 
         # reverse lookup - question.choice_set.all() gets all related choices to that question
         # context['choice_list_reverselookup'] = question_choices.values()
-
+        form = AnswerForm()
+        context['form'] = form
         return context
-
-    # def get_children(self, **kwargs):
 
 # def get_answer(request):
 #     if request.method == 'POST':
