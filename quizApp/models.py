@@ -6,9 +6,10 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_save
 from django.urls import reverse
 
+
 class Quiz(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Name")
-    slug = models.SlugField(max_length=200, unique=True,default="test")
+    slug = models.SlugField(max_length=200, unique=True, default="test")
 
     class Meta:
         verbose_name = "Quiz"
@@ -23,7 +24,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question_text = models.CharField(max_length=255, unique=True)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name = "questionsOfQuiz")
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="questionsOfQuiz")
 
     class Meta:
         verbose_name = "Question"
@@ -32,6 +33,7 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question_choices')
@@ -39,9 +41,10 @@ class Choice(models.Model):
     class Meta:
         verbose_name = "Choice"
         verbose_name_plural = "Choices"
-    
+
     def __str__(self):
         return self.choice_text
+
 
 class QuizAnswer(models.Model):
     answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
@@ -51,10 +54,13 @@ class QuizAnswer(models.Model):
         verbose_name = "Answer"
         verbose_name_plural = "Answers"
 
+
 '''
     make sure that the name of the quiz gets slugified and that the questions_count
      in the quiz is always equal to the number of questions related to that quiz
 '''
+
+
 @receiver(pre_save, sender=Quiz)
 def slugify_name(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.name)

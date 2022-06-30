@@ -12,7 +12,7 @@ class AnswerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AnswerForm, self).__init__(*args, **kwargs)
         self.fields['answer_choice'].queryset = Choice.objects.filter(id=1)
-        #self.fields['user'].queryset = User.objects.filter(user=requ)
+        self.fields['user'].queryset = User.objects.filter(id=1)
 
 
 
