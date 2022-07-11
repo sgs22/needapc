@@ -21,6 +21,9 @@ class Quiz(models.Model):
     def get_absolute_url(self):
         return reverse('quizApp:quiz_detail', kwargs={'slug': self.slug})
 
+    def get_questions(Self):
+         return self.question_set.all()
+
 
 class Question(models.Model):
     question_text = models.CharField(max_length=255, unique=True)
@@ -33,6 +36,9 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def get_choices(self):
+        return self.question_choices.all()
+
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
@@ -43,7 +49,7 @@ class Choice(models.Model):
         verbose_name_plural = "Choices"
 
     def __str__(self):
-        return self.choice_text
+        return f"Question: {self.question.question_text}, Choice: {self.choice_text}"
 
 
 class QuizAnswer(models.Model):
