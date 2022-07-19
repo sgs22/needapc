@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load socialaccount %}
 
 {% block content %}
 
@@ -22,12 +21,6 @@
       <a class="link" href="{% url 'register' %}">Or sign up!</a>
     </label>
   </form>
-  <!-- <a class="btn btn-lg btn-warning" href="{% provider_login_url 'google' %}">Login With Google</a> -->
-  <a class="btn btn-outline-dark btn-lg" href="{% provider_login_url 'google' %}" role="button" style="text-transform:none">
-    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-    Login with Google
-  </a>
-  
 </div>
 
 

@@ -20,11 +20,12 @@
   <div class="row">
       <!-- Column -->
       <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
+        {% for quiz in quiz_list %}
         <ul>
-          {% for quiz in quiz_list %}
-          <a href="{{quiz.get_absolute_url }}">{{ quiz.name }}</a>
-          {% endfor %}
+          <h3>{{quiz.name}}</h3>
+          <a href="{{quiz.get_absolute_url }}">Start Quiz</a>
         </ul>
+        {% endfor %}
         </div>
       </div>
     </div>
