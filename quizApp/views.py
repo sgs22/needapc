@@ -35,6 +35,7 @@ class QuizDetail(generic.DetailView):
         context['question_list'] = Question.objects.select_related().filter(quiz=quiz_id)
         context['choice_list'] = Choice.objects.all()
         question_id = context.get('object').id
+        print()
         # for question in context['question_list']:
         #    print(question.question_choices.all().values())
         # context['question_choices'] = question.choice_set.all()
@@ -45,7 +46,7 @@ class QuizDetail(generic.DetailView):
         # print(context['choice_list'])
 
         # reverse lookup - question.choice_set.all() gets all related choices to that question
-        form = AnswerForm()
+        form = AnswerForm(question=question_id)
         context['form'] = form
         return context
 

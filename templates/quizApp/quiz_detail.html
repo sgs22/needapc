@@ -21,13 +21,6 @@
                     <p class="lead"><b>Question ID:</b> {{ question.id }}</p>
                   <p class="lead"><b>Quiz Name:</b> {{ question.quiz }}</p>
                     <p class="lead"><b>Question:</b> {{ question.question_text }}</p>
-                {% for choice in choice_list %}
-                    {% if question.id == choice.question_id %}
-                        <ul>
-                            <li class="lead"><b>Choice Option:</b> {{ choice.choice_text }}</li>
-                        </ul>
-                    {% endif %}
-                {% endfor %}
                 <form method="POST" class="post-form">{% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit" class="save btn btn-default">Submit</button>
