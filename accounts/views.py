@@ -54,12 +54,6 @@ def login_view(request):
 
     return render(request, "accounts/login.html", {"form": form})
 
-
-'''
-    This is no longer active as newer form offers AJAX, still using old 'RegisterForm'
-'''
-
-
 def register_view(request):
     form = RegisterForm(request.POST or None)
     if form.is_valid():
