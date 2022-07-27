@@ -19,13 +19,19 @@
                 {% for question in question_list %}
                 <div style="padding-bottom: 50px">
                     <p class="lead"><b>Question ID:</b> {{ question.id }}</p>
-                  <p class="lead"><b>Quiz Name:</b> {{ question.quiz }}</p>
+                    <p class="lead"><b>Quiz Name:</b> {{ question.quiz }}</p>
                     <p class="lead"><b>Question:</b> {{ question.question_text }}</p>
                 <form method="POST" class="post-form">{% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form3.as_p }}
                     <button type="submit" class="save btn btn-default">Submit</button>
                 </form>
                 </div>
+                {% if question.id in form_list  %}
+                <form method="POST" class="post-form">{% csrf_token %}
+                  {{ form }}
+                  <button type="submit" class="save btn btn-default">Submit</button>
+                </form>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
