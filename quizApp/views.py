@@ -7,7 +7,7 @@ from django.views.generic import DetailView
 from .models import Quiz, Question, Choice, QuizAnswer, User
 
 from .forms import AnswerForm
-from django.forms import modelformset_factory
+from django.forms import modelformset_factory, inlineformset_factory
 
 
 class QuizList(generic.ListView):
@@ -31,23 +31,36 @@ class QuizDetail(generic.DetailView):
         context = super().get_context_data(**kwargs)
         quiz_id = context.get('object').id
         context['question_list'] = Question.objects.select_related().filter(quiz=quiz_id)
+        context['question_list2'] = Question.objects.select_related()
         number_of_questions = len(Question.objects.select_related().filter(quiz=quiz_id))
-        print(context['question_list'])
-        form_list = []
+        # print(context['question_list'])
+        # form_list = []
         # for question in context['question_list']:
         #     form = AnswerForm(question=question.id)
         #     context[f'form{question.id}'] = form
         #     form_list.append(context[f'form{question.id}'])
         #     print(f'form{question.id}')
         # print(form_list)
-        context['form_list'] = form_list
 
-        AnswerFormSet = modelformset_factory(QuizAnswer, fields='__all__', extra=number_of_questions)
-        formset = AnswerFormSet(queryset=Choice.objects.filter(id=1))
-        # initial=[{'answer_choice': Choice.objects.filter(id=question),'user': 2,} for question in [1,3]]
-        print(formset)
-        context['formset'] = formset
+        # print(formset)
+        # context['formset'] = formset
         return context
+        
+class QuestionList(generic.ListView):
+    queryset = Question.objects.all()
+    template_name = 'quizApp/question.html'
+    context_object_name = 'question_list'
+
+class QuestionDetail(generic.DetailView):
+    model = Question
+    template_name = 'quizApp/question_detail.html'
+
+
+
+
+# for each question in quiz:
+    # for each choice in question:
+        # formset init set_related
 
 
 # for question in context['question_list']:

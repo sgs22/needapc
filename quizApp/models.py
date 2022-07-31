@@ -33,6 +33,9 @@ class Question(models.Model):
         verbose_name = "Question"
         verbose_name_plural = "Questions"
 
+    def get_absolute_url(self):
+        return reverse('quizApp:question_detail', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.question_text
 
