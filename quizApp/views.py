@@ -27,24 +27,33 @@ class QuizDetail(generic.DetailView):
     #     print(form.user)
     #     return redirect('quizapp/')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        quiz_id = context.get('object').id
-        context['question_list'] = Question.objects.select_related().filter(quiz=quiz_id)
-        context['question_list2'] = Question.objects.select_related()
-        number_of_questions = len(Question.objects.select_related().filter(quiz=quiz_id))
-        # print(context['question_list'])
-        # form_list = []
-        # for question in context['question_list']:
-        #     form = AnswerForm(question=question.id)
-        #     context[f'form{question.id}'] = form
-        #     form_list.append(context[f'form{question.id}'])
-        #     print(f'form{question.id}')
-        # print(form_list)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     quiz_id = context.get('object').id
+    #     context['question_list'] = Question.objects.select_related().filter(quiz=quiz_id)
+    #     context['question_list2'] = Question.objects.select_related()
+    #     number_of_questions = len(Question.objects.select_related().filter(quiz=quiz_id))
+    #     # print(context['question_list'])
+    #     # form_list = []
+    #     # for question in context['question_list']:
+    #     #     form = AnswerForm(question=question.id)
+    #     #     context[f'form{question.id}'] = form
+    #     #     form_list.append(context[f'form{question.id}'])
+    #     #     print(f'form{question.id}')
+    #     # print(form_list)
 
-        # print(formset)
-        # context['formset'] = formset
-        return context
+    #     # print(formset)
+    #     # context['formset'] = formset
+    #     return context
+
+def quiz_detail(request, slug):
+    template_name = 'quizApp/quiz_detail.html'
+    quiz = get_object_or_404(Quiz, slug=slug)
+    questions = quiz.questions
+    print(quiz)
+    print(questions)
+    return render(request, template_name, {'quiz': quiz,
+                                            'questions':questions})
         
 class QuestionList(generic.ListView):
     queryset = Question.objects.all()
