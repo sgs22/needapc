@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.views.generic import DetailView
 
@@ -49,11 +49,11 @@ class QuizDetail(generic.DetailView):
 def quiz_detail(request, slug):
     template_name = 'quizApp/quiz_detail.html'
     quiz = get_object_or_404(Quiz, slug=slug)
-    questions = quiz.questions
+    questions = quiz.questions.all()
     print(quiz)
     print(questions)
     return render(request, template_name, {'quiz': quiz,
-                                            'questions':questions})
+                                            'question_list':questions})
         
 class QuestionList(generic.ListView):
     queryset = Question.objects.all()
@@ -63,6 +63,32 @@ class QuestionList(generic.ListView):
 class QuestionDetail(generic.DetailView):
     model = Question
     template_name = 'quizApp/question_detail.html'
+
+def question_detail(request, slug, pk):
+    quiz = get_object_or_404(Quiz, slug=slug)
+    template_name = 'quizApp/question_detail.html'
+    question = Question.objects.get(pk=pk)
+    choices = question.choices.all()
+    user = request.user
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        print(request.POST.answer_choice)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.user = request.user
+            answer.answer_choice = request.POST.get('answer_choice')
+            form.save()
+            print(request.user)
+            return redirect('quiz_detail')
+    else:
+        form = AnswerForm(choices=choices)
+    # print(request.user)
+    # print(question)
+    # print(choices)
+    return render(request, template_name, {'question': question,
+                                            'choices':choices,
+                                            'form':form})
+
 
 
 

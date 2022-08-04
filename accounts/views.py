@@ -20,19 +20,15 @@ from .forms import (
     RegisterForm
 )
 
-
 # Create your views here.
 def logout_view(request):
     logout(request)
     return redirect("/")
 
-
 '''
     TODO: add validation error for incorrect user input for feedback for the user rather than just refreshing the page.
     
 '''
-
-
 def login_view(request):
     form = LoginForm(request.POST or None)
     if form.is_valid():

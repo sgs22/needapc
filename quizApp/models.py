@@ -34,7 +34,7 @@ class Question(models.Model):
         verbose_name_plural = "Questions"
 
     def get_absolute_url(self):
-        return reverse('quizApp:question_detail', kwargs={'pk': self.pk})
+        return reverse('quizApp:question_detail', kwargs={'slug':self.quiz.slug, 'pk': self.pk})
 
     def __str__(self):
         return self.question_text
@@ -45,7 +45,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='question_choices')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices')
 
     class Meta:
         verbose_name = "Choice"
@@ -57,7 +57,7 @@ class Choice(models.Model):
 
 class QuizAnswer(models.Model):
     answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
 
     class Meta:
         verbose_name = "Answer"

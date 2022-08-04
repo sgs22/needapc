@@ -16,10 +16,6 @@
           </div>
         <div class="row">
             <div class="col-lg">
-              <form method="POST" class="post-form">{% csrf_token %}
-                {{ formset.as_p }}
-                <button type="submit" class="save btn btn-default">Submit</button>
-              </form>
               <br>
               <br>
                 {% for question in question_list %}
@@ -27,6 +23,7 @@
                     <p class="lead"><b>Question ID:</b> {{ question.id }}</p>
                     <p class="lead"><b>Quiz Name:</b> {{ question.quiz }}</p>
                     <p class="lead"><b>Question:</b> {{ question.question_text }}</p>
+                    <a href="{{question.get_absolute_url}}">Question {{ question.id}}</a>
                 <!-- <form method="POST" class="post-form">{% csrf_token %}
                     {{ form3.as_p }}
                     <button type="submit" class="save btn btn-default">Submit</button>
