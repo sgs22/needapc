@@ -8,7 +8,7 @@ class AnswerForm(forms.ModelForm):
 
     class Meta:
         model = QuizAnswer
-        exclude = ["user"]
+        exclude = ['user']
         widgets = {
             'answer_choice': forms.RadioSelect
         }
