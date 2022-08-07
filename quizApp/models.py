@@ -26,6 +26,7 @@ class Quiz(models.Model):
 
 
 class Question(models.Model):
+    question_order = models.IntegerField(blank=False, default=1)
     question_text = models.CharField(max_length=255, unique=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="questions")
 

@@ -9,12 +9,13 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = QuizAnswer
         exclude = ['user']
-        widgets = {
-            'answer_choice': forms.RadioSelect
-        }
 
-    def __init__(self, choices, *args, **kwargs):
+
+    def __init__(self, *args, **kwargs):
+        choices = kwargs.pop('choices', None)
         super(AnswerForm, self).__init__(*args, **kwargs)
-        self.fields['answer_choice'] = forms.ChoiceField(
-            choices=[(o, str(o)) for o in choices]
+        self.fields['answer_choice'] = forms.ModelChoiceField(
+            required=True,
+            queryset=choices,
+            widget=forms.RadioSelect
         )

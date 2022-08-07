@@ -50,8 +50,6 @@ def quiz_detail(request, slug):
     template_name = 'quizApp/quiz_detail.html'
     quiz = get_object_or_404(Quiz, slug=slug)
     questions = quiz.questions.all()
-    print(quiz)
-    print(questions)
     return render(request, template_name, {'quiz': quiz,
                                             'question_list':questions})
         
@@ -68,23 +66,20 @@ def question_detail(request, slug, pk):
     quiz = get_object_or_404(Quiz, slug=slug)
     template_name = 'quizApp/question_detail.html'
     question = Question.objects.get(pk=pk)
+    next_question = int(question.question_order) + 1
     choices = question.choices.all()
-    user = request.user
     if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        print(request.POST.answer_choice)
+        print(request.POST)
+        form = AnswerForm(request.POST, choices=choices)
         if form.is_valid():
             answer = form.save(commit=False)
             answer.user = request.user
-            answer.answer_choice = request.POST.get('answer_choice')
             form.save()
-            print(request.user)
-            return redirect('quiz_detail')
+            # if next question exists then redirect it
+            # else get result page
+            return redirect('quizApp:question_detail', slug=slug, pk=next_question)
     else:
         form = AnswerForm(choices=choices)
-    # print(request.user)
-    # print(question)
-    # print(choices)
     return render(request, template_name, {'question': question,
                                             'choices':choices,
                                             'form':form})
