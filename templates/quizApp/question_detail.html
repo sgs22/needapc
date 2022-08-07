@@ -10,14 +10,15 @@
         <div class="container">
           <div class="row">
             <div class="col-lg pb-3">
-              <h1 class="display-4">Question Name: {{ question.question_text }}</h1>
-              <p class="lead">Question Parent Quiz: {{ question.quiz }}</p>
+              <h1 class="display-4">{{ question.question_text }}</h1>
+              <p class="lead">{{ question.quiz }}</p>
             </div>
           </div>
         <div class="row">
           <form method="POST" class="post-form">{% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Submit</button>
+            <a class="save btn btn-default">Previous Question</a>
+            <button type="submit" class="save btn btn-default">Next Question</button>
           </form>
         </div>
         </div>
