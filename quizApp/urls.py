@@ -4,7 +4,7 @@ from . import views
 """
     Url paths extended from from django.urls
 """
-app_name = 'quizApp'
+app_name = 'quizapp'
 urlpatterns = [
     path('quizapp/<slug:slug>/<int:pk>/', views.question_detail, name='question_detail'),
     # path('quizapp/questions/', views.QuestionList.as_view(), name='question_list'),
