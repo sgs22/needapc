@@ -75,9 +75,11 @@ def question_detail(request, slug, pk):
             answer = form.save(commit=False)
             answer.user = request.user
             form.save()
-            # if next question exists then redirect it
-            # else get result page
-            return redirect('quizApp:question_detail', slug=slug, pk=next_question)
+            # if next question exists then redirect to it
+            if(question.question_order <= len(quiz.questions.all()))
+                return redirect('quizApp:question_detail', slug=slug, pk=next_question)
+            else
+                return redirect('quizApp:quiz_overview', slug=slug)
     else:
         form = AnswerForm(choices=choices)
     return render(request, template_name, {'question': question,

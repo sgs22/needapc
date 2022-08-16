@@ -21,7 +21,7 @@ class Quiz(models.Model):
     def get_absolute_url(self):
         return reverse('quizApp:quiz_detail', kwargs={'slug': self.slug})
 
-    def get_questions(Self):
+    def get_questions(self):
          return self.question_set.all()
 
 
