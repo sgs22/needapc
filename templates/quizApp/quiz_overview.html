@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Form for quiz template to take inspo from https://jthemes.net/themes/html/wizard-form/v1/-->
+{% block content %}
+<div class="col-lg">
+  <div class="jumbotron jumbotron-fluid jumbotronfeatured" style="padding-top: 100px; padding-bottom: 100px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg">
+          <h1 class="display-4">What you have told us.</h1>
+          <p class="lead">We are now generating your result!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <!-- Column -->
+      <div class="col-md-6 mt-3 left" style="padding-top: 7px;">
+        {% for answer in quiz_answers %}
+        <ul>
+          <h3>{{answer.answer_choice}}</h3>
+        </ul>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+

@@ -75,16 +75,33 @@ def question_detail(request, slug, pk):
             answer = form.save(commit=False)
             answer.user = request.user
             form.save()
+            return redirect('quizApp:question_detail', slug=slug, pk=next_question)
             # if next question exists then redirect to it
-            if(question.question_order <= len(quiz.questions.all()))
-                return redirect('quizApp:question_detail', slug=slug, pk=next_question)
-            else
-                return redirect('quizApp:quiz_overview', slug=slug)
+            # if(question.question_order <= len(quiz.questions.all()))
+            #     return redirect('quizApp:question_detail', slug=slug, pk=next_question)
+            # else
+            #     return redirect('quizApp:quiz_overview', slug=slug)
     else:
         form = AnswerForm(choices=choices)
     return render(request, template_name, {'question': question,
                                             'choices':choices,
                                             'form':form})
+
+def quiz_overview(request, slug):
+    template_name = 'quizApp/quiz_overview.html'
+    quiz = get_object_or_404(Quiz, slug=slug)
+    questions = quiz.questions.all()
+    quiz_answers = []
+    for question in questions:
+        choices = question.choices.all()
+        for choice in choices:
+            final_answer = choice.answer.first()
+            if(final_answer != None):
+                quiz_answers.append(final_answer)
+    answers = QuizAnswer.objects.filter(user=request.user)
+    print(quiz_answers)
+    return render(request, template_name, {'answers': answers,
+                                            'quiz_answers': quiz_answers})
 
 
 
