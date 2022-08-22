@@ -53,11 +53,14 @@ class Choice(models.Model):
         verbose_name_plural = "Choices"
 
     def __str__(self):
-        return f"Question: {self.question.question_text}, Choice: {self.choice_text}"
+        return self.choice_text
+
+    # def __str__(self):
+    #     return f"Question: {self.question.question_text}, Choice: {self.choice_text}"
 
 
 class QuizAnswer(models.Model):
-    answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    answer_choice = models.ForeignKey(Choice, on_delete=models.CASCADE, related_name='answer')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
 
     class Meta:
