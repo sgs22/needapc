@@ -1,8 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.views.generic import DetailView
+
 
 from .models import Quiz, Question, Choice, QuizAnswer, User
 
@@ -46,6 +48,7 @@ class QuizDetail(generic.DetailView):
     #     # context['formset'] = formset
     #     return context
 
+@login_required
 def quiz_detail(request, slug):
     template_name = 'quizApp/quiz_detail.html'
     quiz = get_object_or_404(Quiz, slug=slug)
@@ -62,6 +65,7 @@ class QuestionDetail(generic.DetailView):
     model = Question
     template_name = 'quizApp/question_detail.html'
 
+@login_required
 def question_detail(request, slug, pk):
     quiz = get_object_or_404(Quiz, slug=slug)
     template_name = 'quizApp/question_detail.html'
@@ -87,6 +91,7 @@ def question_detail(request, slug, pk):
                                             'choices':choices,
                                             'form':form})
 
+@login_required
 def quiz_overview(request, slug):
     template_name = 'quizApp/quiz_overview.html'
     quiz = get_object_or_404(Quiz, slug=slug)
